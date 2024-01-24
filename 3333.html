@@ -68,7 +68,11 @@
     placeholder="Поиск"
     oninput="filterChart(event)"
   />
-
+<button
+  onclick='chart.connections([{from:"101",to:"122",label:"Conflicts of interest"}]).render()'
+>
+  Multi Node Connections
+</button>
 <button onclick="chart.compact(false).render().fit()">Горизонтально</button>
 <button onclick="chart.compact(true).render().fit()">Вертикально</button>
 <button onclick="chart.clearHighlighting().setCentered(110).setUpToTheRootHighlighted('110').render()">Подсветить 10 отдел</button>
@@ -126,9 +130,9 @@
         .nodeHeight((d) => 105 + 25)
         .nodeWidth((d) => 220 + 150)
         .nodeButtonWidth((t) => 382)
-        .nodeButtonHeight((t) => 50)
+        .nodeButtonHeight((t) => 130)
         .nodeButtonX((t) => -190)
-        .nodeButtonY((t) => -47)
+        .nodeButtonY((t) => -126)
         .childrenMargin((d) => 50)
         .compactMarginBetween((d) => 35)
         .compactMarginPair((d) => 30)
@@ -197,7 +201,6 @@
         .data(data)
         .render();
 
-
 });
 
     function viewUserProfile(userId) {
@@ -210,6 +213,7 @@
 
 });
   </script>
+  <g class="connections-wrapper"><path class="connection" d="M-877,625C121,625,121,270,1119,270" fill="none" stroke="#E27396" stroke-linecap="round" stroke-width="5" pointer-events="none" marker-start="url(#145_201)" marker-end="url(#arrow-145_201)"></path></g>
 </body>
 
 </html>
