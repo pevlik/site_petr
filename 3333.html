@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .details-button {
+	  margin-inline-start: 300px; 
+	  writing-mode: horizontal-tb;
+      
+      padding: 3px  6px;
+      background-color: rgb(41, 151, 255);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 10px;
+      transition: background-color 0.3s ease-in-out;
+      align-self: flex-end;
+      z-index: 10000
+;
+    }
+
+    .details-button:hover {
+      background-color: #45a049;
+    }
+
+    .highlighted {
+      background-color: rgba(255, 255, 200, 0.2) !important;
+    }
+
+    @media screen and (max-width: 768px) {
+      .user-block {
+        padding: 15px;
+      }
+        }
+  </style>
+</head>
+
+<body>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="./d3-org-chart.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/d3-org-chart@3.0.1"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
+
+ <script>
+      var index = 0;
+      var compact = 1;
+      var actNdCent = 0;
+  </script>
+
+  <input
+    type="search"
+    placeholder="Поиск"
+    oninput="filterChart(event)"
+  />
+
+<button onclick="chart.compact(false).render().fit()">Горизонтально</button>
+<button onclick="chart.compact(true).render().fit()">Вертикально</button>
+<button onclick="chart.clearHighlighting().setCentered(110).setUpToTheRootHighlighted('110').render()">Подсветить 10 отдел</button>
+<button onclick="chart.clearHighlighting().setCentered(111).setUpToTheRootHighlighted('111').render()">Подсветить 14 отдел</button>
+<button onclick="chart.clearHighlighting().setCentered(112).setUpToTheRootHighlighted('112').render()">Подсветить 21 отдел</button>
+<button onclick="chart.clearHighlighting().setCentered(113).setUpToTheRootHighlighted('113').render()">Подсветить 22 отдел</button>
+<button onclick="chart.clearHighlighting().setCentered(114).setUpToTheRootHighlighted('114').render()">Подсветить 24 отдел</button>
+<button onclick="chart.clearHighlighting().setCentered(115).setUpToTheRootHighlighted('115').render()">Подсветить 31 отдел</button>
+<button onclick="chart.clearHighlighting().setCentered(116).setUpToTheRootHighlighted('116').render()">Подсветить 34 отдел</button>
+<button onclick="chart.clearHighlighting().setCentered(117).setUpToTheRootHighlighted('117').render()">Подсветить 41 отдел</button>
+<button onclick="chart.fit()">Отдалить дерево</button>
+<button onclick="chart.clearHighlighting().setCentered(100).collapseAll().render().fit()">Очистить</button>
+
+<div class="chart-container"></div>
+
+</div>
+  <script>
+    let chart;
+
+    function filterChart(e) {
+      // Get input value
+      const value = e.srcElement.value;
+
+      // Clear previous highlighting
+      chart.clearHighlighting();
+
+      // Get chart nodes
+      const data = chart.data();
+
+      // Mark all previously expanded nodes for collapse
+      data.forEach((d) => (d._expanded = false));
+
+	// Loop over data and check if input value matches any name or position
+	data.forEach((d) => {
+  	const nameMatches = value !== '' && d.name.toLowerCase().includes(value.toLowerCase());
+  	const positionMatches = value !== '' && d.position.toLowerCase().includes(value.toLowerCase());
+
+  // If matches either name or position, mark node as highlighted
+  if (nameMatches || positionMatches) {
+    d._highlighted = true;
+    d._expanded = true;
+  }
+});
+
+      // Update data and rerender graph
+      chart.data(data).render().fit();
+      console.log('filtering chart', e.srcElement.value);
+    }
+
+    // This is the data used - https://raw.githubusercontent.com/Potapozavr/Site/main/data-oracle.csv
+    d3.csv( 'https://raw.githubusercontent.com/Potapozavr/Site/main/data-oracle.csv').then((data) => {
+     
+	chart =new d3.OrgChart()
+
+        .nodeHeight((d) => 105 + 25)
+        .nodeWidth((d) => 220 + 150)
+        .nodeButtonWidth((t) => 382)
+        .nodeButtonHeight((t) => 50)
+        .nodeButtonX((t) => -190)
+        .nodeButtonY((t) => -47)
+        .childrenMargin((d) => 50)
+        .compactMarginBetween((d) => 35)
+        .compactMarginPair((d) => 30)
+	      .neighbourMargin((n1, n2) => 20)
+        .nodeContent(function (d, i, arr, state) {
+          const color = '#FFFFFF';
+          const imageDiffVert = 25 + 2;
+
+          return `
+            <div style='width:${d.width}px;
+              height:${d.height}px;
+              padding-top:${imageDiffVert - 2}px;
+              padding-left:1px;
+              padding-right:1px'>
+
+              <div style="font-family: 'Inter', sans-serif;
+                  background-color:${color};
+                  margin-left:-1px;
+                  width:${d.width - 2}px;
+                  height:${d.height - imageDiffVert}px;
+                  border-radius:10px;border: 3px solid #E4E2E9">
+                  
+                  <div style="display:flex;
+                      justify-content:flex-end;
+                      margin-top:5px;
+                      margin-right:8px">#${d.data.id}</div>
+                  
+                  <div style="background-color:${color};
+                      margin-top:${-imageDiffVert - 25}px;
+                      margin-left:${15}px;border-radius:100px;
+                      width:45px;height:45px;" ></div>
+                  
+                  <div style="margin-top:${-imageDiffVert - 25}px;">
+                      <img src=" ${d.data.image}" style="
+                          margin-left:${5}px;
+                          border-radius:100px;
+                          width:60px;
+                          height:60px;" />
+                  </div>
+                  
+                  <div style="font-size:15px;
+                      color:#08011E;
+                      text-align: center;
+                      margin-top:2px"> ${d.data.name} </div>
+                  
+                  <div style="color:#716E7B;
+                      margin-top:8px;
+                      text-align: center;
+                      font-size:10px;"> ${d.data.position} </div>
+                  
+                  <button class="details-button" onclick="viewUserProfile('${d.data.id}')"
+                      style="position: absolute; bottom: -27.5px; right: 19.5px; z-index: inherit;">Подробно</button>
+                  
+                </div>
+                <div style="font-family: 'Inter', sans-serif;
+                    background-color:${color};
+                    margin-left:285px;
+                    margin-top:3px;
+                    width:64.5px;
+                    height:20px;
+                    border-radius:10px;border: 3px solid #E4E2E9">
+                  </div>
+            </div>`;
+})
+        .container('.chart-container')
+        .data(data)
+        .render();
+
+
+});
+
+    function viewUserProfile(userId) {
+      // Реализуйте логику перехода на страницу пользователя по его идентификатору
+}
+
+    // Обработчик изменения размера окна
+    window.addEventListener('resize', function () {
+      chart.render().fit();
+
+});
+  </script>
+</body>
+
+</html>
