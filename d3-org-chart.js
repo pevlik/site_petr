@@ -76,7 +76,8 @@
                 `,
                 buttonContent: ({ node: t, state: e }) => `
                 <div style="position: absolute;border:1px solid #E4E2E9;border-radius:3px;padding:4px;font-size:9px;bottom: -8px;right:179px;margin:auto auto;background-color:white"> 
-                    ${{ left: e => e ? `
+                    ${{
+                        left: e => e ? `
                         <div style="display:flex;">
                             <span style="align-items:center;display:flex;">
                                 <svg width="8" height="8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n                      
@@ -164,8 +165,18 @@
                         </div>\n                   
                     </div>\n                
                 `},
-                nodeUpdate: function (t, e, n) { d.select(this).select(".node-rect").attr("stroke", (t => t.data._highlighted || t.data._upToTheRootHighlighted ? "#E27396" : "none")).attr("stroke-width", t.data._highlighted || t.data._upToTheRootHighlighted ? 10 : 1) },
-                linkUpdate: function (t, e, n) { d.select(this).attr("stroke", (t => t.data._upToTheRootHighlighted ? "#E27396" : "#E4E2E9")).attr("stroke-width", (t => t.data._upToTheRootHighlighted ? 5 : 1)), t.data._upToTheRootHighlighted && d.select(this).raise() },
+                nodeUpdate: function (t, e, n) {
+                    d.select(this)
+                        .select(".node-rect")
+                        .attr("stroke", (t => t.data._highlighted || t.data._upToTheRootHighlighted ? "#E27396" : "none"))
+                        .attr("stroke-width", t.data._highlighted || t.data._upToTheRootHighlighted ? 10 : 1)
+                },
+                linkUpdate: function (t, e, n) {
+                    d.select(this)
+                        .attr("stroke", (t => t.data._upToTheRootHighlighted ? "#E27396" : "#E4E2E9"))
+                        .attr("stroke-width", (t => t.data._upToTheRootHighlighted ? 5 : 1)),
+                        t.data._upToTheRootHighlighted && d.select(this).raise()
+                },
                 hdiagonal: function (t, e, n) {
                     const a = t.x, i = t.y, o = e.x, r = e.y; let d = n && null != n.x ? n.x : a, s = n && null != n.y ? n.y : i, l = o - a < 0 ? -1 : 1, c = r - i < 0 ? -1 : 1, h = Math.abs(o - a) / 2 < 35 ? Math.abs(o - a) / 2 : 35; h = Math.abs(r - i) / 2 < h ? Math.abs(r - i) / 2 : h; Math.abs(r - i);
                     let g = Math.abs(o - a) / 2 - h;
@@ -468,131 +479,654 @@
             const n = d.select(t.container),
                 a = n.node().getBoundingClientRect();
             a.width > 0 && (t.svgWidth = a.width);
-            const i = { id: `ID${Math.floor(1e6 * Math.random())}`, chartWidth: t.svgWidth, chartHeight: t.svgHeight }; if (t.calc = i, i.centerX = i.chartWidth / 2, i.centerY = i.chartHeight / 2, t.firstDraw) { const e = { zoom: null }; e.zoom = t.createZoom().clickDistance(10).on("start", ((e, n) => t.onZoomStart(e))).on("end", ((e, n) => t.onZoomEnd(e))).on("zoom", ((e, n) => { t.onZoom(e), this.zoomed(e, n) })).scaleExtent(t.scaleExtent), t.zoomBehavior = e.zoom } t.flexTreeLayout = o.flextree({ nodeSize: e => { const n = t.nodeWidth(e), a = t.nodeHeight(e), i = t.siblingsMargin(e), o = t.childrenMargin(e); return t.layoutBindings[t.layout].nodeFlexSize({ state: t, node: e, width: n, height: a, siblingsMargin: i, childrenMargin: o }) } }).spacing(((e, n) => e.parent == n.parent ? 0 : t.neighbourMargin(e, n))), this.setLayouts({ expandNodesFirst: !1 }); const r = n.patternify({ tag: "svg", selector: "svg-chart-container" }).attr("width", t.svgWidth).attr("height", t.svgHeight).attr("font-family", t.defaultFont); t.firstDraw && r.call(t.zoomBehavior).on("dblclick.zoom", null).attr("cursor", "move"), t.svg = r; const s = r.patternify({ tag: "g", selector: "chart" }); return t.centerG = s.patternify({ tag: "g", selector: "center-group" }), t.linksWrapper = t.centerG.patternify({ tag: "g", selector: "links-wrapper" }), t.nodesWrapper = t.centerG.patternify({ tag: "g", selector: "nodes-wrapper" }), t.connectionsWrapper = t.centerG.patternify({ tag: "g", selector: "connections-wrapper" }), t.defsWrapper = r.patternify({ tag: "g", selector: "defs-wrapper" }), t.firstDraw && t.centerG.attr("transform", (() => t.layoutBindings[t.layout].centerTransform({ centerX: i.centerX, centerY: i.centerY, scale: t.lastTransform.k, rootMargin: t.rootMargin, root: t.root, chartHeight: i.chartHeight, chartWidth: i.chartWidth }))), t.chart = s, this.update(t.root), d.select(window).on(`resize.${t.id}`, (() => { const e = d.select(t.container).node().getBoundingClientRect(); t.svg.attr("width", e.width) })), t.firstDraw && (t.firstDraw = !1), this
-        } addNode(t) { const e = this.getChartState(), n = e.generateRoot(e.data).descendants(), a = n.filter((({ data: n }) => e.nodeId(n).toString() === e.nodeId(t).toString()))[0], i = n.filter((({ data: n }) => e.nodeId(n).toString() === e.parentNodeId(t).toString()))[0]; return a ? (console.log(`ORG CHART - ADD - Node with id "${e.nodeId(t)}" already exists in tree`), this) : i ? (t._centered && !t._expanded && (t._expanded = !0), e.data.push(t), this.updateNodesState(), this) : (console.log(`ORG CHART - ADD - Parent node with id "${e.parentNodeId(t)}" not found in the tree`), this) } removeNode(t) { const e = this.getChartState(), n = e.generateRoot(e.data).descendants().filter((({ data: n }) => e.nodeId(n) == t))[0]; if (!n) return console.log(`ORG CHART - REMOVE - Node with id "${t}" not found in the tree`), this; if (n.descendants().forEach((t => t.data._filteredOut = !0)), e.data = e.data.filter((t => !t._filteredOut)), 0 == e.data.length) this.render(); else { this.updateNodesState.bind(this)() } return this } groupBy(t, e, n) { const a = {}; return t.forEach((t => { const n = e(t); a[n] || (a[n] = []), a[n].push(t) })), Object.keys(a).forEach((t => { a[t] = n(a[t]) })), Object.entries(a) } calculateCompactFlexDimensions(t) { const e = this.getChartState(); t.eachBefore((t => { t.firstCompact = null, t.compactEven = null, t.flexCompactDim = null, t.firstCompactNode = null })), t.eachBefore((t => { if (t.children && t.children.length > 1) { const n = t.children.filter((t => !t.children)); if (n.length < 2) return; n.forEach(((t, e) => { e || (t.firstCompact = !0), t.compactEven = !(e % 2), t.row = Math.floor(e / 2) })); const a = d.max(n.filter((t => t.compactEven)), e.layoutBindings[e.layout].compactDimension.sizeColumn), i = d.max(n.filter((t => !t.compactEven)), e.layoutBindings[e.layout].compactDimension.sizeColumn), o = 2 * Math.max(a, i), r = this.groupBy(n, (t => t.row), (t => d.max(t, (t => e.layoutBindings[e.layout].compactDimension.sizeRow(t) + e.compactMarginBetween(t))))), s = d.sum(r.map((t => t[1]))); n.forEach((t => { t.firstCompactNode = n[0], t.firstCompact ? t.flexCompactDim = [o + e.compactMarginPair(t), s - e.compactMarginBetween(t)] : t.flexCompactDim = [0, 0] })), t.flexCompactDim = null } })) } calculateCompactFlexPositions(t) { const e = this.getChartState(); t.eachBefore((t => { if (t.children) { const n = t.children.filter((t => t.flexCompactDim)), a = n[0]; if (!a) return; n.forEach(((t, n, i) => { 0 == n && (a.x -= a.flexCompactDim[0] / 2), n & n % 2 - 1 ? t.x = a.x + .25 * a.flexCompactDim[0] - e.compactMarginPair(t) / 4 : n && (t.x = a.x + .75 * a.flexCompactDim[0] + e.compactMarginPair(t) / 4) })); const i = a.x + .5 * a.flexCompactDim[0]; a.x = a.x + .25 * a.flexCompactDim[0] - e.compactMarginPair(a) / 4; const o = t.x - i; Math.abs(o) < 10 && n.forEach((t => t.x += o)); const r = this.groupBy(n, (t => t.row), (t => d.max(t, (t => e.layoutBindings[e.layout].compactDimension.sizeRow(t))))), s = d.cumsum(r.map((t => t[1] + e.compactMarginBetween(t)))); n.forEach(((t, e) => { t.row ? t.y = a.y + s[t.row - 1] : t.y = a.y })) } })) } update({ x0: t, y0: e, x: n = 0, y: a = 0, width: i, height: o }) { const r = this.getChartState(); r.calc; r.compact && this.calculateCompactFlexDimensions(r.root); const s = r.flexTreeLayout(r.root); r.compact && this.calculateCompactFlexPositions(r.root); const l = s.descendants(), c = s.descendants().slice(1); l.forEach(r.layoutBindings[r.layout].swap); const h = r.connections, g = {}; r.allNodes.forEach((t => g[r.nodeId(t.data)] = t)); const p = {}; l.forEach((t => p[r.nodeId(t.data)] = t)), h.forEach((t => { const e = g[t.from], n = g[t.to]; t._source = e, t._target = n })); const u = h.filter((t => p[t.from] && p[t.to])), m = r.defs.bind(this)(r, u); m !== r.defsWrapper.html() && r.defsWrapper.html(m); const f = r.linksWrapper.selectAll("path.link").data(c, (t => r.nodeId(t.data))), y = f.enter().insert("path", "g").attr("class", "link").attr("d", (n => { const a = { x: r.layoutBindings[r.layout].linkJoinX({ x: t, y: e, width: i, height: o }), y: r.layoutBindings[r.layout].linkJoinY({ x: t, y: e, width: i, height: o }) }; return r.layoutBindings[r.layout].diagonal(a, a, a) })).merge(f); y.attr("fill", "none"), this.isEdge() ? y.style("display", (t => t.data._pagingButton ? "none" : "auto")) : y.attr("display", (t => t.data._pagingButton ? "none" : "auto")), y.each(r.linkUpdate), y.transition().duration(r.duration).attr("d", (t => { const e = r.compact && t.flexCompactDim ? { x: r.layoutBindings[r.layout].compactLinkMidX(t, r), y: r.layoutBindings[r.layout].compactLinkMidY(t, r) } : { x: r.layoutBindings[r.layout].linkX(t), y: r.layoutBindings[r.layout].linkY(t) }, n = { x: r.layoutBindings[r.layout].linkParentX(t), y: r.layoutBindings[r.layout].linkParentY(t) }, a = r.compact && t.flexCompactDim ? { x: r.layoutBindings[r.layout].linkCompactXStart(t), y: r.layoutBindings[r.layout].linkCompactYStart(t) } : e; return r.layoutBindings[r.layout].diagonal(e, n, a, { sy: r.linkYOffset }) })); f.exit().transition().duration(r.duration).attr("d", (t => { const e = { x: r.layoutBindings[r.layout].linkJoinX({ x: n, y: a, width: i, height: o }), y: r.layoutBindings[r.layout].linkJoinY({ x: n, y: a, width: i, height: o }) }; return r.layoutBindings[r.layout].diagonal(e, e, null, { sy: r.linkYOffset }) })).remove(); const x = r.connectionsWrapper.selectAll("path.connection").data(u), C = x.enter().insert("path", "g").attr("class", "connection").attr("d", (n => { const a = { x: r.layoutBindings[r.layout].linkJoinX({ x: t, y: e, width: i, height: o }), y: r.layoutBindings[r.layout].linkJoinY({ x: t, y: e, width: i, height: o }) }; return r.layoutBindings[r.layout].diagonal(a, a, null, { sy: r.linkYOffset }) })).merge(x); C.attr("fill", "none"), C.transition().duration(r.duration).attr("d", (t => { const e = r.layoutBindings[r.layout].linkX({ x: t._source.x, y: t._source.y, width: t._source.width, height: t._source.height }), n = r.layoutBindings[r.layout].linkY({ x: t._source.x, y: t._source.y, width: t._source.width, height: t._source.height }), a = r.layoutBindings[r.layout].linkJoinX({ x: t._target.x, y: t._target.y, width: t._target.width, height: t._target.height }), i = r.layoutBindings[r.layout].linkJoinY({ x: t._target.x, y: t._target.y, width: t._target.width, height: t._target.height }); return r.linkGroupArc({ source: { x: e, y: n }, target: { x: a, y: i } }) })), C.each(r.connectionsUpdate); x.exit().transition().duration(r.duration).attr("opacity", 0).remove(); const w = r.nodesWrapper.selectAll("g.node").data(l, (({ data: t }) => r.nodeId(t))), v = w.enter().append("g").attr("class", "node").attr("transformtransform", (n => { if (n == r.root) return `translate(${t},${e})`; return `translate(${r.layoutBindings[r.layout].nodeJoinX({ x: t, y: e, width: i, height: o })},${r.layoutBindings[r.layout].nodeJoinY({ x: t, y: e, width: i, height: o })})` })).attr("cursor", "pointer").on("click.node", ((t, e) => { const { data: n } = e;[...t.srcElement.classList].includes("node-button-foreign-object") || ([...t.srcElement.classList].includes("paging-button-wrapper") ? this.loadPagingNodes(e) : n._pagingButton ? console.log("event fired, no handlers") : r.onNodeClick(e)) })).on("keydown.node", ((t, e) => { const { data: n } = e; if ("Enter" === t.key || " " === t.key || "Spacebar" === t.key) { if ([...t.srcElement.classList].includes("node-button-foreign-object")) return; if ([...t.srcElement.classList].includes("paging-button-wrapper")) return void this.loadPagingNodes(e); "Enter" !== t.key && " " !== t.key && "Spacebar" !== t.key || this.onButtonClick(t, e) } })); v.patternify({ tag: "rect", selector: "node-rect", data: t => [t] }); const k = v.merge(w).style("font", "12px sans-serif"); k.patternify({ tag: "foreignObject", selector: "node-foreign-object", data: t => [t] }).style("overflow", "visible").patternify({ tag: "xhtml:div", selector: "node-foreign-object-div", data: t => [t] }), this.restyleForeignObjectElements(); const E = v.patternify({ tag: "g", selector: "node-button-g", data: t => [t] }).on("click", ((t, e) => this.onButtonClick(t, e))); E.patternify({ tag: "rect", selector: "node-button-rect", data: t => [t] }).attr("opacity", 0).attr("pointer-events", "all").attr("width", (t => r.nodeButtonWidth(t))).attr("height", (t => r.nodeButtonHeight(t))).attr("x", (t => r.nodeButtonX(t))).attr("y", (t => r.nodeButtonY(t))); E.patternify({ tag: "foreignObject", selector: "node-button-foreign-object", data: t => [t] }).attr("width", (t => r.nodeButtonWidth(t))).attr("height", (t => r.nodeButtonHeight(t))).attr("x", (t => r.nodeButtonX(t))).attr("y", (t => r.nodeButtonY(t))).style("overflow", "visible").patternify({ tag: "xhtml:div", selector: "node-button-div", data: t => [t] }).style("pointer-events", "none").style("display", "flex").style("width", "100%").style("height", "100%"); k.transition().attr("opacity", 0).duration(r.duration).attr("transform", (({ x: t, y: e, width: n, height: a }) => r.layoutBindings[r.layout].nodeUpdateTransform({ x: t, y: e, width: n, height: a }))).attr("opacity", 1), k.select(".node-rect").attr("width", (({ width: t }) => t)).attr("height", (({ height: t }) => t)).attr("x", (({ width: t }) => 0)).attr("y", (({ height: t }) => 0)).attr("cursor", "pointer").attr("rx", 3).attr("fill", r.nodeDefaultBackground), k.select(".node-button-g").attr("transform", (({ data: t, width: e, height: n }) => `translate(${r.layoutBindings[r.layout].buttonX({ width: e, height: n })},${r.layoutBindings[r.layout].buttonY({ width: e, height: n })})`)).attr("display", (({ data: t }) => t._directSubordinates > 0 ? null : "none")).attr("opacity", (({ data: t, children: e, _children: n }) => t._pagingButton ? 0 : e || n ? 1 : 0)), k.select(".node-button-foreign-object .node-button-div").html((t => r.buttonContent({ node: t, state: r }))), k.select(".node-button-text").attr("text-anchor", "middle").attr("alignment-baseline", "middle").attr("font-size", (({ children: t }) => t ? 40 : 26)).text((({ children: t }) => t ? "-" : "+")).attr("y", this.isEdge() ? 10 : 0), k.each(r.nodeUpdate); const B = w.exit(), b = B.data().reduce(((t, e) => t.depth < e.depth ? t : e), { depth: 1 / 0 }); B.attr("opacity", 1).transition().duration(r.duration).attr("transform", (t => { let { x: e, y: n, width: a, height: i } = b.parent || {}; return `translate(${r.layoutBindings[r.layout].nodeJoinX({ x: e, y: n, width: a, height: i })},${r.layoutBindings[r.layout].nodeJoinY({ x: e, y: n, width: a, height: i })})` })).on("end", (function () { d.select(this).remove() })).attr("opacity", 0), l.forEach((t => { t.x0 = t.x, t.y0 = t.y })); const _ = r.allNodes.filter((t => t.data._centered))[0]; if (_) { let t = [_]; _.data._centeredWithDescendants && (t = r.compact ? _.descendants().filter(((t, e) => e < 7)) : _.descendants().filter(((t, e, n) => { const a = Math.round(n.length / 2); return n.length % 2 ? e > a - 2 && e < a + 2 - 1 : e > a - 2 && e < a + 2 }))), _.data._centeredWithDescendants = null, _.data._centered = null, this.fit({ animate: !0, scale: !1, nodes: t }) } } isEdge() { return window.navigator.userAgent.includes("Edge") } hdiagonal(t, e, n, a) { return this.getChartState().hdiagonal(t, e, n, a) } diagonal(t, e, n, a) { return this.getChartState().diagonal(t, e, n, a) } restyleForeignObjectElements() { const t = this.getChartState(); t.svg.selectAll(".node-foreign-object").attr("width", (({ width: t }) => t)).attr("height", (({ height: t }) => t)).attr("x", (({ width: t }) => 0)).attr("y", (({ height: t }) => 0)), t.svg.selectAll(".node-foreign-object-div").style("width", (({ width: t }) => `${t}px`)).style("height", (({ height: t }) => `${t}px`)).html((function (e, n, a) { return e.data._pagingButton ? `<div class="paging-button-wrapper"><div style="pointer-events:none">${t.pagingButton(e, n, a, t)}</div></div>` : t.nodeContent.bind(this)(e, n, a, t) })) } onButtonClick(t, e) { const n = this.getChartState(); e.data._pagingButton || (n.setActiveNodeCentered && (e.data._centered = !0, e.data._centeredWithDescendants = !0), e.children ? (e._children = e.children, e.children = null, this.setExpansionFlagToChildren(e, !1)) : (e.children = e._children, e._children = null, e.children && e.children.forEach((({ data: t }) => t._expanded = !0))), this.update(e), t.stopPropagation(), n.onExpandOrCollapse(e)) } setExpansionFlagToChildren({ data: t, children: e, _children: n }, a) { t._expanded = a, e && e.forEach((t => { this.setExpansionFlagToChildren(t, a) })), n && n.forEach((t => { this.setExpansionFlagToChildren(t, a) })) } expandSomeNodes(t) { if (t.data._expanded) { let e = t.parent; for (; e && e._children;)e.children = e._children, e._children = null, e = e.parent } t._children && t._children.forEach((t => this.expandSomeNodes(t))), t.children && t.children.forEach((t => this.expandSomeNodes(t))) } updateNodesState() { const t = this.getChartState(); this.setLayouts({ expandNodesFirst: !0 }), this.update(t.root) } setLayouts({ expandNodesFirst: t = !0 }) { const e = this.getChartState(); e.generateRoot = d.stratify().id((t => e.nodeId(t))).parentId((t => e.parentNodeId(t))), e.root = e.generateRoot(e.data); const n = e.root.descendants(); e.initialExpandLevel > 1 && n.length > 0 && (n.forEach((t => { t.depth <= e.initialExpandLevel && (t.data._expanded = !0) })), e.initialExpandLevel = 1); const a = {}; e.root.descendants().filter((t => t.children)).filter((t => !t.data._pagingStep)).forEach((t => { t.data._pagingStep = e.minPagingVisibleNodes(t) })), e.root.eachBefore(((t, e) => { t.data._directSubordinatesPaging = t.children ? t.children.length : 0, t.children && t.children.forEach(((e, n) => { if (e.data._pagingButton = !1, n > t.data._pagingStep && (a[e.id] = !0), n === t.data._pagingStep && t.children.length - 1 > t.data._pagingStep && (e.data._pagingButton = !0), a[e.parent.id] && (a[e.id] = !0), e.data._expanded || e.data._centered || e.data._highlighted || e.data._upToTheRootHighlighted) { let t = e; for (; t && (a[t.id] || t.data._pagingButton);)a[t.id] = !1, t.data._pagingButton && (t.data._pagingButton = !1, t.parent.children.forEach((t => { t.data._expanded = !0, a[t.id] = !1 }))), t = t.parent } })) })), e.root = d.stratify().id((t => e.nodeId(t))).parentId((t => e.parentNodeId(t)))(e.data.filter((t => !0 !== a[t.id]))), e.root.each(((t, n, a) => { let i = t._hierarchyHeight || t.height, o = e.nodeWidth(t), r = e.nodeHeight(t); Object.assign(t, { width: o, height: r, _hierarchyHeight: i }) })), e.root.x0 = 0, e.root.y0 = 0, e.allNodes = e.root.descendants(), e.allNodes.forEach((t => { Object.assign(t.data, { _directSubordinates: t.children ? t.children.length : 0, _totalSubordinates: t.descendants().length - 1 }) })), e.root.children && (t && e.root.children.forEach(this.expand), e.root.children.forEach((t => this.collapse(t))), 0 == e.initialExpandLevel && (e.root._children = e.root.children, e.root.children = null), [e.root].forEach((t => this.expandSomeNodes(t)))) } collapse(t) { t.children && (t._children = t.children, t._children.forEach((t => this.collapse(t))), t.children = null) } expand(t) { t._children && (t.children = t._children, t.children.forEach((t => this.expand(t))), t._children = null) } zoomed(t, e) { const n = this.getChartState(), a = n.chart, i = t.transform; n.lastTransform = i, a.attr("transform", i), this.isEdge() && this.restyleForeignObjectElements() } zoomTreeBounds({ x0: t, x1: e, y0: n, y1: a, params: i = { animate: !0, scale: !0, onCompleted: () => { } } }) { const { centerG: o, svgWidth: r, svgHeight: s, svg: l, zoomBehavior: c, duration: h, lastTransform: g } = this.getChartState(); let p = Math.min(8, .9 / Math.max((e - t) / r, (a - n) / s)), u = d.zoomIdentity.translate(r / 2, s / 2); u = u.scale(i.scale ? p : g.k), u = u.translate(-(t + e) / 2, -(n + a) / 2), l.transition().duration(i.animate ? h : 0).call(c.transform, u), o.transition().duration(i.animate ? h : 0).attr("transform", "translate(0,0)").on("end", (function () { i.onCompleted && i.onCompleted() })) } fit({ animate: t = !0, nodes: e, scale: n = !0, onCompleted: a = (() => { }) } = {}) { const i = this.getChartState(), { root: o } = i; let r = e || o.descendants(); const s = d.min(r, (t => t.x + i.layoutBindings[i.layout].nodeLeftX(t))), l = d.max(r, (t => t.x + i.layoutBindings[i.layout].nodeRightX(t))), c = d.min(r, (t => t.y + i.layoutBindings[i.layout].nodeTopY(t))), h = d.max(r, (t => t.y + i.layoutBindings[i.layout].nodeBottomY(t))); return this.zoomTreeBounds({ params: { animate: t, scale: n, onCompleted: a }, x0: s - 50, x1: l + 50, y0: c - 50, y1: h + 50 }), this } loadPagingNodes(t) { const e = this.getChartState(); t.data._pagingButton = !1; const n = t.parent.data._pagingStep + e.pagingStep(t.parent); t.parent.data._pagingStep = n, this.updateNodesState() } setExpanded(t, e = !0) { const n = this.getChartState(), a = n.allNodes.filter((({ data: e }) => n.nodeId(e) == t))[0]; if (!a) return console.log(`ORG CHART - ${e ? "EXPAND" : "COLLAPSE"} - Node with id (${t})  not found in the tree`), this; if (a.data._expanded = e, 0 == e) { const t = a.parent || { descendants: () => [] }; t.descendants().filter((e => e != t)).forEach((t => t.data._expanded = !1)) } return this } setCentered(t) { const e = this.getChartState(), n = e.generateRoot(e.data).descendants().filter((({ data: n }) => e.nodeId(n).toString() == t.toString()))[0]; if (!n) return console.log(`ORG CHART - CENTER - Node with id (${t}) not found in the tree`), this; return n.ancestors().forEach((t => t.data._expanded = !0)), n.data._centered = !0, n.data._expanded = !0, this } setHighlighted(t) { const e = this.getChartState(), n = e.generateRoot(e.data).descendants().filter((n => e.nodeId(n.data).toString() === t.toString()))[0]; if (!n) return console.log(`ORG CHART - HIGHLIGHT - Node with id (${t})  not found in the tree`), this; return n.ancestors().forEach((t => t.data._expanded = !0)), n.data._highlighted = !0, n.data._expanded = !0, n.data._centered = !0, this } setUpToTheRootHighlighted(t) { const e = this.getChartState(), n = e.generateRoot(e.data).descendants().filter((n => e.nodeId(n.data).toString() === t.toString()))[0]; if (!n) return console.log(`ORG CHART - HIGHLIGHTROOT - Node with id (${t}) not found in the tree`), this; return n.ancestors().forEach((t => t.data._expanded = !0)), n.data._upToTheRootHighlighted = !0, n.data._expanded = !0, n.ancestors().forEach((t => t.data._upToTheRootHighlighted = !0)), this } clearHighlighting() { const t = this.getChartState(); return t.allNodes.forEach((t => { t.data._highlighted = !1, t.data._upToTheRootHighlighted = !1 })), this.update(t.root), this } fullscreen(t) { const e = this.getChartState(), n = d.select(t || e.container).node(); d.select(document).on("fullscreenchange." + e.id, (function (t) { (document.fullscreenElement || document.mozFullscreenElement || document.webkitFullscreenElement) == n ? setTimeout((t => { e.svg.attr("height", window.innerHeight - 40) }), 500) : e.svg.attr("height", e.svgHeight) })), n.requestFullscreen ? n.requestFullscreen() : n.mozRequestFullScreen ? n.mozRequestFullScreen() : n.webkitRequestFullscreen ? n.webkitRequestFullscreen() : n.msRequestFullscreen && n.msRequestFullscreen() }
-        zoomIn() { 
-            const { svg: t, zoomBehavior: e } = this.getChartState(); 
-            t.transition().call(e.scaleBy, 1.3) 
+            const i = {
+                id: `ID${Math.floor(1e6 * Math.random())}`,
+                chartWidth: t.svgWidth,
+                chartHeight: t.svgHeight
+            };
+            if (t.calc = i, i.centerX = i.chartWidth / 2, i.centerY = i.chartHeight / 2, t.firstDraw) {
+                const e = { zoom: null };
+                e.zoom = t.createZoom().clickDistance(10).on("start", ((e, n) => t.onZoomStart(e)))
+                    .on("end", ((e, n) => t.onZoomEnd(e)))
+                    .on("zoom", ((e, n) => {
+                        t.onZoom(e),
+                            this.zoomed(e, n)
+                    })).scaleExtent(t.scaleExtent),
+                    t.zoomBehavior = e.zoom
+            }
+            t.flexTreeLayout = o.flextree({
+                nodeSize: e => {
+                    const n = t.nodeWidth(e),
+                        a = t.nodeHeight(e),
+                        i = t.siblingsMargin(e),
+                        o = t.childrenMargin(e);
+                    return t.layoutBindings[t.layout].nodeFlexSize({
+                        state: t,
+                        node: e,
+                        width: n,
+                        height: a,
+                        siblingsMargin: i,
+                        childrenMargin: o
+                    })
+                }
+            })
+                .spacing(((e, n) => e.parent == n.parent ? 0 : t.neighbourMargin(e, n))), this.setLayouts({ expandNodesFirst: !1 });
+            const r = n.patternify({ tag: "svg", selector: "svg-chart-container" })
+                .attr("width", t.svgWidth)
+                .attr("height", t.svgHeight)
+                .attr("font-family", t.defaultFont);
+            t.firstDraw && r.call(t.zoomBehavior)
+                .on("dblclick.zoom", null)
+                .attr("cursor", "move"),
+                t.svg = r;
+            const s = r.patternify({ tag: "g", selector: "chart" });
+            return t.centerG = s.patternify({ tag: "g", selector: "center-group" }),
+                t.linksWrapper = t.centerG.patternify({ tag: "g", selector: "links-wrapper" }),
+                t.nodesWrapper = t.centerG.patternify({ tag: "g", selector: "nodes-wrapper" }),
+                t.connectionsWrapper = t.centerG.patternify({ tag: "g", selector: "connections-wrapper" }),
+                t.defsWrapper = r.patternify({ tag: "g", selector: "defs-wrapper" }),
+                t.firstDraw && t.centerG.attr("transform", (() => t.layoutBindings[t.layout].centerTransform({
+                    centerX: i.centerX,
+                    centerY: i.centerY,
+                    scale: t.lastTransform.k,
+                    rootMargin: t.rootMargin,
+                    root: t.root,
+                    chartHeight: i.chartHeight,
+                    chartWidth: i.chartWidth
+                }))),
+                t.chart = s,
+                this.update(t.root),
+                d.select(window)
+                    .on(`resize.${t.id}`, (() => {
+                        const e = d.select(t.container).node().getBoundingClientRect();
+                        t.svg.attr("width", e.width)
+                    })),
+                t.firstDraw && (t.firstDraw = !1),
+                this
         }
-        zoomOut() { 
-            const { svg: t, zoomBehavior: e } = this.getChartState(); 
-            t.transition().call(e.scaleBy, .78) }
-        toDataURL(t, e) { 
-            var n = new XMLHttpRequest; n.onload = function () { 
-                var t = new FileReader; 
-                t.onloadend = function () { e(t.result) }, 
-                t.readAsDataURL(n.response) 
-            }, 
-            n.open("GET", t), 
-            n.responseType = "blob", n.send() 
+        addNode(t) {
+            const e = this.getChartState(),
+                n = e.generateRoot(e.data).descendants(),
+                a = n.filter((({ data: n }) => e.nodeId(n).toString() === e.nodeId(t).toString()))[0],
+                i = n.filter((({ data: n }) => e.nodeId(n).toString() === e.parentNodeId(t).toString()))[0];
+            return a ? (
+                console.log(`ORG CHART - ADD - Node with id "${e.nodeId(t)}" already exists in tree`),
+                this
+            ) : i ? (
+                t._centered && !t._expanded && (t._expanded = !0),
+                e.data.push(t), this.updateNodesState(),
+                this
+            ) : (
+                console.log(`ORG CHART - ADD - Parent node with id "${e.parentNodeId(t)}" not found in the tree`),
+                this
+            )
+        }
+        removeNode(t) {
+            const e = this.getChartState(),
+                n = e.generateRoot(e.data).descendants().filter((({ data: n }) => e.nodeId(n) == t))[0];
+            if (!n) return (
+                console.log(`ORG CHART - REMOVE - Node with id "${t}" not found in the tree`),
+                this
+            );
+            if (
+                n.descendants().forEach((t => t.data._filteredOut = !0)),
+                e.data = e.data.filter((t => !t._filteredOut)),
+                0 == e.data.length) this.render();
+            else {
+                this.updateNodesState.bind(this)()
+            }
+            return this
+        }
+        groupBy(t, e, n) {
+            const a = {};
+            return t.forEach((t => {
+                const n = e(t);
+                a[n] || (a[n] = []),
+                    a[n].push(t)
+            })),
+                Object.keys(a).forEach((t => {
+                    a[t] = n(a[t])
+                })),
+                Object.entries(a)
+        }
+        calculateCompactFlexDimensions(t) {
+            const e = this.getChartState();
+            t.eachBefore((t => {
+                t.firstCompact = null,
+                    t.compactEven = null,
+                    t.flexCompactDim = null,
+                    t.firstCompactNode = null
+            })),
+                t.eachBefore((t => {
+                    if (t.children && t.children.length > 1) {
+                        const n = t.children.filter((t => !t.children));
+                        if (n.length < 2) return;
+                        n.forEach(((t, e) => {
+                            e || (t.firstCompact = !0),
+                                t.compactEven = !(e % 2),
+                                t.row = Math.floor(e / 2)
+                        }));
+                        const a = d.max(n.filter((t => t.compactEven)), e.layoutBindings[e.layout].compactDimension.sizeColumn),
+                            i = d.max(n.filter((t => !t.compactEven)), e.layoutBindings[e.layout].compactDimension.sizeColumn),
+                            o = 2 * Math.max(a, i),
+                            r = this.groupBy(n, (t => t.row), (t => d.max(t, (t => e.layoutBindings[e.layout].compactDimension.sizeRow(t) + e.compactMarginBetween(t))))),
+                            s = d.sum(r.map((t => t[1])));
+                        n.forEach((t => {
+                            t.firstCompactNode = n[0],
+                                t.firstCompact ? t.flexCompactDim = [o + e.compactMarginPair(t), s - e.compactMarginBetween(t)] : t.flexCompactDim = [0, 0]
+                        })),
+                            t.flexCompactDim = null
+                    }
+                }))
+        }
+        calculateCompactFlexPositions(t) {
+            const e = this.getChartState();
+            t.eachBefore((t => {
+                if (t.children) {
+                    const n = t.children.filter((t => t.flexCompactDim)),
+                        a = n[0];
+                    if (!a) return;
+                    n.forEach(((t, n, i) => {
+                        0 == n && (a.x -= a.flexCompactDim[0] / 2),
+                            n & n % 2 - 1 ?
+                                t.x = a.x + .25 * a.flexCompactDim[0] - e.compactMarginPair(t) / 4 :
+                                n && (t.x = a.x + .75 * a.flexCompactDim[0] + e.compactMarginPair(t) / 4)
+                    }));
+                    const i = a.x + .5 * a.flexCompactDim[0];
+                    a.x = a.x + .25 * a.flexCompactDim[0] - e.compactMarginPair(a) / 4;
+                    const o = t.x - i;
+                    Math.abs(o) < 10 &&
+                        n.forEach((t => t.x += o));
+                    const r = this.groupBy(n, (t => t.row), (t => d.max(t, (t => e.layoutBindings[e.layout].compactDimension.sizeRow(t))))),
+                        s = d.cumsum(r.map((t => t[1] + e.compactMarginBetween(t))));
+                    n.forEach(((t, e) => {
+                        t.row ? t.y = a.y + s[t.row - 1] : t.y = a.y
+                    }))
+                }
+            }))
+        }
+        update({ x0: t, y0: e, x: n = 0, y: a = 0, width: i, height: o }) {
+            const r = this.getChartState();
+            r.calc;
+            r.compact && this.calculateCompactFlexDimensions(r.root);
+            const s = r.flexTreeLayout(r.root);
+            r.compact && this.calculateCompactFlexPositions(r.root);
+            const l = s.descendants(),
+                c = s.descendants().slice(1);
+            l.forEach(r.layoutBindings[r.layout].swap);
+            const h = r.connections, g = {};
+            r.allNodes.forEach((t => g[r.nodeId(t.data)] = t));
+            const p = {};
+            l.forEach((t => p[r.nodeId(t.data)] = t)),
+                h.forEach((t => {
+                    const e = g[t.from], n = g[t.to];
+                    t._source = e, t._target = n
+                }));
+            const u = h.filter((t => p[t.from] && p[t.to])),
+                m = r.defs.bind(this)(r, u);
+            m !== r.defsWrapper.html() && r.defsWrapper.html(m);
+            const f = r.linksWrapper.selectAll("path.link").data(c, (t => r.nodeId(t.data))),
+                y = f.enter().insert("path", "g").attr("class", "link").attr("d", (n => {
+                    const a = {
+                        x: r.layoutBindings[r.layout].linkJoinX({ x: t, y: e, width: i, height: o }),
+                        y: r.layoutBindings[r.layout].linkJoinY({ x: t, y: e, width: i, height: o })
+                    };
+                    return r.layoutBindings[r.layout].diagonal(a, a, a)
+                })).merge(f);
+            y.attr("fill", "none"),
+                this.isEdge() ?
+                    y.style("display", (t => t.data._pagingButton ? "none" : "auto")) :
+                    y.attr("display", (t => t.data._pagingButton ? "none" : "auto")),
+                y.each(r.linkUpdate), y.transition().duration(r.duration).attr("d", (t => {
+                    const e = r.compact && t.flexCompactDim ? {
+                        x: r.layoutBindings[r.layout].compactLinkMidX(t, r),
+                        y: r.layoutBindings[r.layout].compactLinkMidY(t, r)
+                    } : {
+                        x: r.layoutBindings[r.layout].linkX(t),
+                        y: r.layoutBindings[r.layout].linkY(t)
+                    },
+                        n = {
+                            x: r.layoutBindings[r.layout].linkParentX(t),
+                            y: r.layoutBindings[r.layout].linkParentY(t)
+                        },
+                        a = r.compact && t.flexCompactDim ? {
+                            x: r.layoutBindings[r.layout].linkCompactXStart(t),
+                            y: r.layoutBindings[r.layout].linkCompactYStart(t)
+                        } : e;
+                    return r.layoutBindings[r.layout].diagonal(e, n, a, { sy: r.linkYOffset })
+                }));
+            f.exit().transition().duration(r.duration).attr("d", (t => {
+                const e = {
+                    x: r.layoutBindings[r.layout].linkJoinX({ x: n, y: a, width: i, height: o }),
+                    y: r.layoutBindings[r.layout].linkJoinY({ x: n, y: a, width: i, height: o })
+                };
+                return r.layoutBindings[r.layout].diagonal(e, e, null, { sy: r.linkYOffset })
+            })).remove();
+            const x = r.connectionsWrapper.selectAll("path.connection").data(u),
+                C = x.enter().insert("path", "g").attr("class", "connection").attr("d", (n => {
+                    const a = {
+                        x: r.layoutBindings[r.layout].linkJoinX({ x: t, y: e, width: i, height: o }),
+                        y: r.layoutBindings[r.layout].linkJoinY({ x: t, y: e, width: i, height: o })
+                    };
+                    return r.layoutBindings[r.layout].diagonal(a, a, null, { sy: r.linkYOffset })
+                })).merge(x);
+            C.attr("fill", "none"),
+                C.transition().duration(r.duration).attr("d", (t => {
+                    const e = r.layoutBindings[r.layout].linkX({
+                        x: t._source.x,
+                        y: t._source.y,
+                        width: t._source.width,
+                        height: t._source.height
+                    }),
+                        n = r.layoutBindings[r.layout].linkY({ x: t._source.x, y: t._source.y, width: t._source.width, height: t._source.height }),
+                        a = r.layoutBindings[r.layout].linkJoinX({ x: t._target.x, y: t._target.y, width: t._target.width, height: t._target.height }),
+                        i = r.layoutBindings[r.layout].linkJoinY({ x: t._target.x, y: t._target.y, width: t._target.width, height: t._target.height });
+                    return r.linkGroupArc({ source: { x: e, y: n }, target: { x: a, y: i } })
+                })),
+                C.each(r.connectionsUpdate);
+            x.exit().transition().duration(r.duration).attr("opacity", 0).remove();
+            const w = r.nodesWrapper.selectAll("g.node").data(l, (({ data: t }) => r.nodeId(t))),
+                v = w.enter().append("g").attr("class", "node")
+                    .attr("transformtransform", (n => {
+                        if (n == r.root)
+                            return `translate(${t},${e})`;
+                        return `translate(${r.layoutBindings[r.layout].nodeJoinX({ x: t, y: e, width: i, height: o })},${r.layoutBindings[r.layout].nodeJoinY({ x: t, y: e, width: i, height: o })})`
+                    }))
+                    .attr("cursor", "pointer")
+                    .on("click.node", ((t, e) => {
+                        const { data: n } = e;
+                        [...t.srcElement.classList].includes("node-button-foreign-object") ||
+                            ([...t.srcElement.classList].includes("paging-button-wrapper") ? this.loadPagingNodes(e) : n._pagingButton ? console.log("event fired, no handlers") : r.onNodeClick(e))
+                    }))
+                    .on("keydown.node", ((t, e) => {
+                        const { data: n } = e;
+                        if ("Enter" === t.key || " " === t.key || "Spacebar" === t.key) {
+                            if ([...t.srcElement.classList].includes("node-button-foreign-object")) return;
+                            if ([...t.srcElement.classList].includes("paging-button-wrapper")) return void this.loadPagingNodes(e);
+                            "Enter" !== t.key && " " !== t.key && "Spacebar" !== t.key || this.onButtonClick(t, e)
+                        }
+                    }));
+            v.patternify({ tag: "rect", selector: "node-rect", data: t => [t] });
+            const k = v.merge(w).style("font", "12px sans-serif");
+            k.patternify({ tag: "foreignObject", selector: "node-foreign-object", data: t => [t] }).style("overflow", "visible").patternify({ tag: "xhtml:div", selector: "node-foreign-object-div", data: t => [t] }), this.restyleForeignObjectElements();
+            const E = v.patternify({ tag: "g", selector: "node-button-g", data: t => [t] }).on("click", ((t, e) => this.onButtonClick(t, e)));
+            E.patternify({ tag: "rect", selector: "node-button-rect", data: t => [t] })
+                .attr("opacity", 0).attr("pointer-events", "all").attr("width", (t => r.nodeButtonWidth(t)))
+                .attr("height", (t => r.nodeButtonHeight(t)))
+                .attr("x", (t => r.nodeButtonX(t)))
+                .attr("y", (t => r.nodeButtonY(t)));
+            E.patternify({ tag: "foreignObject", selector: "node-button-foreign-object", data: t => [t] })
+                .attr("width", (t => r.nodeButtonWidth(t)))
+                .attr("height", (t => r.nodeButtonHeight(t)))
+                .attr("x", (t => r.nodeButtonX(t)))
+                .attr("y", (t => r.nodeButtonY(t)))
+                .style("overflow", "visible")
+                .patternify({ tag: "xhtml:div", selector: "node-button-div", data: t => [t] })
+                .style("pointer-events", "none")
+                .style("display", "flex").style("width", "100%")
+                .style("height", "100%");
+            k.transition()
+                .attr("opacity", 0)
+                .duration(r.duration)
+                .attr("transform", (({ x: t, y: e, width: n, height: a }) =>
+                    r.layoutBindings[r.layout].nodeUpdateTransform({ x: t, y: e, width: n, height: a })))
+                .attr("opacity", 1),
+                k.select(".node-rect")
+                    .attr("width", (({ width: t }) => t))
+                    .attr("height", (({ height: t }) => t))
+                    .attr("x", (({ width: t }) => 0))
+                    .attr("y", (({ height: t }) => 0))
+                    .attr("cursor", "pointer")
+                    .attr("rx", 3)
+                    .attr("fill", r.nodeDefaultBackground),
+                k.select(".node-button-g")
+                    .attr("transform", (({ data: t, width: e, height: n }) =>
+                        `translate(${r.layoutBindings[r.layout].buttonX({ width: e, height: n })},${r.layoutBindings[r.layout].buttonY({ width: e, height: n })})`))
+                    .attr("display", (({ data: t }) => t._directSubordinates > 0 ? null : "none"))
+                    .attr("opacity", (({ data: t, children: e, _children: n }) =>
+                        t._pagingButton ? 0 : e || n ? 1 : 0)),
+                k.select(".node-button-foreign-object .node-button-div")
+                    .html((t => r.buttonContent({ node: t, state: r }))),
+                k.select(".node-button-text")
+                    .attr("text-anchor", "middle")
+                    .attr("alignment-baseline", "middle")
+                    .attr("font-size", (({ children: t }) => t ? 40 : 26)).text((({ children: t }) => t ? "-" : "+"))
+                    .attr("y", this.isEdge() ? 10 : 0),
+                k.each(r.nodeUpdate);
+            const B = w.exit(),
+                b = B.data().reduce(((t, e) =>
+                    t.depth < e.depth ? t : e), { depth: 1 / 0 });
+            B.attr("opacity", 1)
+                .transition()
+                .duration(r.duration)
+                .attr("transform", (t => {
+                    let { x: e, y: n, width: a, height: i } = b.parent || {};
+                    return `translate(${r.layoutBindings[r.layout].nodeJoinX({ x: e, y: n, width: a, height: i })},${r.layoutBindings[r.layout].nodeJoinY({ x: e, y: n, width: a, height: i })})`
+                }))
+                .on("end", (function () { d.select(this).remove() }))
+                .attr("opacity", 0),
+                l.forEach((t => { t.x0 = t.x, t.y0 = t.y }));
+            const _ = r.allNodes.filter((t => t.data._centered))[0];
+            if (_) {
+                let t = [_];
+                _.data._centeredWithDescendants && (t = r.compact ? _.descendants().filter(((t, e) => e < 7)) : _.descendants().filter(((t, e, n) => {
+                    const a = Math.round(n.length / 2);
+                    return n.length % 2 ? e > a - 2 && e < a + 2 - 1 : e > a - 2 && e < a + 2
+                }))),
+                    _.data._centeredWithDescendants = null,
+                    _.data._centered = null,
+                    this.fit({
+                        animate: !0, scale: !1, nodes: t
+                    })
+            }
+        }
+        isEdge() {
+            return window.navigator.userAgent.includes("Edge")
+        }
+        hdiagonal(t, e, n, a) {
+            return this.getChartState().hdiagonal(t, e, n, a)
+        }
+        diagonal(t, e, n, a) {
+            return this.getChartState().diagonal(t, e, n, a)
+        }
+        restyleForeignObjectElements() {
+            const t = this.getChartState();
+            t.svg.selectAll(".node-foreign-object")
+                .attr("width", (({ width: t }) => t)).attr("height", (({ height: t }) => t))
+                .attr("x", (({ width: t }) => 0))
+                .attr("y", (({ height: t }) => 0)),
+                t.svg.selectAll(".node-foreign-object-div")
+                    .style("width", (({ width: t }) => `${t}px`))
+                    .style("height", (({ height: t }) => `${t}px`))
+                    .html((function (e, n, a) {
+                        return e.data._pagingButton
+                            ? `<div class="paging-button-wrapper"><div style="pointer-events:none">${t.pagingButton(e, n, a, t)}</div></div>`
+                            : t.nodeContent.bind(this)(e, n, a, t)
+                    }))
+        }
+        onButtonClick(t, e) {
+            const n = this.getChartState();
+            e.data._pagingButton ||
+                (n.setActiveNodeCentered && (e.data._centered = !0, e.data._centeredWithDescendants = !0),
+                    e.children ? (e._children = e.children, e.children = null, this.setExpansionFlagToChildren(e, !1)) :
+                        (e.children = e._children, e._children = null,
+                            e.children && e.children.forEach((({ data: t }) => t._expanded = !0))),
+                    this.update(e), t.stopPropagation(), n.onExpandOrCollapse(e))
+        }
+        setExpansionFlagToChildren({ data: t, children: e, _children: n }, a) {
+            t._expanded = a,
+                e && e.forEach((t => { this.setExpansionFlagToChildren(t, a) })),
+                n && n.forEach((t => { this.setExpansionFlagToChildren(t, a) }))
+        }
+        expandSomeNodes(t) {
+            if (t.data._expanded) {
+                let e = t.parent;
+                for (; e && e._children;)e.children = e._children, e._children = null, e = e.parent
+            }
+            t._children && t._children.forEach((t => this.expandSomeNodes(t))),
+                t.children && t.children.forEach((t => this.expandSomeNodes(t)))
+        } 
+        updateNodesState() {
+            const t = this.getChartState();
+            this.setLayouts({ expandNodesFirst: !0 }),
+                this.update(t.root)
+        }
+        setLayouts({ expandNodesFirst: t = !0 }) {
+            const e = this.getChartState();
+            e.generateRoot = d.stratify().id((t => e.nodeId(t))).parentId((t => e.parentNodeId(t))),
+                e.root = e.generateRoot(e.data);
+            const n = e.root.descendants();
+            e.initialExpandLevel > 1 && n.length > 0 && (n.forEach((t => { t.depth <= e.initialExpandLevel && (t.data._expanded = !0) })), e.initialExpandLevel = 1);
+            const a = {}; e.root.descendants().filter((t => t.children)).filter((t => !t.data._pagingStep)).forEach((t => { t.data._pagingStep = e.minPagingVisibleNodes(t) })),
+                e.root.eachBefore(((t, e) => {
+                    t.data._directSubordinatesPaging = t.children ? t.children.length : 0,
+                        t.children && t.children.forEach(((e, n) => {
+                            if (e.data._pagingButton = !1, n > t.data._pagingStep && (a[e.id] = !0),
+                                n === t.data._pagingStep && t.children.length - 1 > t.data._pagingStep && (e.data._pagingButton = !0),
+                                a[e.parent.id] && (a[e.id] = !0),
+                                e.data._expanded || e.data._centered || e.data._highlighted || e.data._upToTheRootHighlighted) {
+                                let t = e;
+                                for (; t && (a[t.id] || t.data._pagingButton);)
+                                    a[t.id] = !1,
+                                        t.data._pagingButton &&
+                                        (t.data._pagingButton = !1, t.parent.children.forEach((t => { t.data._expanded = !0, a[t.id] = !1 }))),
+                                        t = t.parent
+                            }
+                        }))
+                })),
+                e.root = d.stratify().id((t => e.nodeId(t))).parentId((t => e.parentNodeId(t)))(e.data.filter((t => !0 !== a[t.id]))),
+                e.root.each(((t, n, a) => {
+                    let i = t._hierarchyHeight || t.height,
+                        o = e.nodeWidth(t),
+                        r = e.nodeHeight(t);
+                    Object.assign(t, { width: o, height: r, _hierarchyHeight: i })
+                })),
+                e.root.x0 = 0,
+                e.root.y0 = 0,
+                e.allNodes = e.root.descendants(),
+                e.allNodes.forEach((t => {
+                    Object.assign(t.data, {
+                        _directSubordinates: t.children ? t.children.length : 0,
+                        _totalSubordinates: t.descendants().length - 1
+                    })
+                })),
+                e.root.children && (t && e.root.children.forEach(this.expand),
+                    e.root.children.forEach((t => this.collapse(t))),
+                    0 == e.initialExpandLevel && (e.root._children = e.root.children, e.root.children = null),
+                    [e.root].forEach((t => this.expandSomeNodes(t))))
+        }
+        collapse(t) {
+            t.children && (t._children = t.children,
+                t._children.forEach((t => this.collapse(t))),
+                t.children = null)
+        }
+        expand(t) {
+            t._children && (t.children = t._children, t.children.forEach((t => this.expand(t))), t._children = null)
+        }
+        zoomed(t, e) {
+            const n = this.getChartState(),
+                a = n.chart,
+                i = t.transform;
+            n.lastTransform = i,
+                a.attr("transform", i),
+                this.isEdge() && this.restyleForeignObjectElements()
+        }
+        zoomTreeBounds({ x0: t, x1: e, y0: n, y1: a, params: i = { animate: !0, scale: !0, onCompleted: () => { } } }) {
+            const { centerG: o, svgWidth: r, svgHeight: s, svg: l, zoomBehavior: c, duration: h, lastTransform: g } = this.getChartState();
+            let p = Math.min(8, .9 / Math.max((e - t) / r, (a - n) / s)),
+                u = d.zoomIdentity.translate(r / 2, s / 2);
+            u = u.scale(i.scale ? p : g.k),
+                u = u.translate(-(t + e) / 2, -(n + a) / 2),
+                l.transition().duration(i.animate ? h : 0).call(c.transform, u),
+                o.transition().duration(i.animate ? h : 0).attr("transform", "translate(0,0)").on("end", (function () { i.onCompleted && i.onCompleted() }))
+        }
+        fit({ animate: t = !0, nodes: e, scale: n = !0, onCompleted: a = (() => { }) } = {}) {
+            const i = this.getChartState(),
+                { root: o } = i;
+            let r = e || o.descendants();
+            const
+                s = d.min(r, (t => t.x + i.layoutBindings[i.layout].nodeLeftX(t))),
+                l = d.max(r, (t => t.x + i.layoutBindings[i.layout].nodeRightX(t))),
+                c = d.min(r, (t => t.y + i.layoutBindings[i.layout].nodeTopY(t))),
+                h = d.max(r, (t => t.y + i.layoutBindings[i.layout].nodeBottomY(t)));
+            return this.zoomTreeBounds({ params: { animate: t, scale: n, onCompleted: a }, x0: s - 50, x1: l + 50, y0: c - 50, y1: h + 50 }), this
+        }
+        loadPagingNodes(t) {
+            const e = this.getChartState();
+            t.data._pagingButton = !1;
+            const n = t.parent.data._pagingStep + e.pagingStep(t.parent);
+            t.parent.data._pagingStep = n,
+                this.updateNodesState()
+        }
+        setExpanded(t, e = !0) {
+            const n = this.getChartState(),
+                a = n.allNodes.filter((({ data: e }) => n.nodeId(e) == t))[0];
+            if (!a) return console.log(`ORG CHART - ${e ? "EXPAND" : "COLLAPSE"} - Node with id (${t})  not found in the tree`), this;
+            if (a.data._expanded = e, 0 == e) {
+                const t = a.parent || { descendants: () => [] };
+                t.descendants().filter((e => e != t)).forEach((t => t.data._expanded = !1))
+            }
+            return this
+        }
+        setCentered(t) {
+            const e = this.getChartState(),
+                n = e.generateRoot(e.data).descendants().filter((({ data: n }) => e.nodeId(n).toString() == t.toString()))[0]; if (!n) return console.log(`ORG CHART - CENTER - Node with id (${t}) not found in the tree`), this;
+            return n.ancestors().forEach((t => t.data._expanded = !0)), n.data._centered = !0, n.data._expanded = !0,
+                this
+        }
+        setHighlighted(t) {
+            const e = this.getChartState(),
+                n = e.generateRoot(e.data).descendants().filter((n => e.nodeId(n.data).toString() === t.toString()))[0]; if (!n) return console.log(`ORG CHART - HIGHLIGHT - Node with id (${t})  not found in the tree`), this;
+            return n.ancestors().forEach((t => t.data._expanded = !0)), n.data._highlighted = !0, n.data._expanded = !0, n.data._centered = !0,
+                this
+        }
+        setUpToTheRootHighlighted(t) {
+            const e = this.getChartState(),
+                n = e.generateRoot(e.data).descendants().filter((n => e.nodeId(n.data).toString() === t.toString()))[0]; if (!n) return console.log(`ORG CHART - HIGHLIGHTROOT - Node with id (${t}) not found in the tree`), this;
+            return n.ancestors().forEach((t => t.data._expanded = !0)), n.data._upToTheRootHighlighted = !0, n.data._expanded = !0, n.ancestors().forEach((t => t.data._upToTheRootHighlighted = !0)),
+                this
+        }
+        clearHighlighting() {
+            const t = this.getChartState();
+            return t.allNodes.forEach((t => {
+                t.data._highlighted = !1,
+                    t.data._upToTheRootHighlighted = !1
+            })), this.update(t.root),
+                this
+        }
+        fullscreen(t) {
+            const e = this.getChartState(),
+                n = d.select(t || e.container).node(); d.select(document).on("fullscreenchange." + e.id, (function (t) { (document.fullscreenElement || document.mozFullscreenElement || document.webkitFullscreenElement) == n ? setTimeout((t => { e.svg.attr("height", window.innerHeight - 40) }), 500) : e.svg.attr("height", e.svgHeight) })), n.requestFullscreen ? n.requestFullscreen() : n.mozRequestFullScreen ? n.mozRequestFullScreen() : n.webkitRequestFullscreen ? n.webkitRequestFullscreen() : n.msRequestFullscreen && n.msRequestFullscreen()
+        }
+        zoomIn() {
+            const { svg: t, zoomBehavior: e } = this.getChartState();
+            t.transition().call(e.scaleBy, 1.3)
+        }
+        zoomOut() {
+            const { svg: t, zoomBehavior: e } = this.getChartState();
+            t.transition().call(e.scaleBy, .78)
+        }
+        toDataURL(t, e) {
+            var n = new XMLHttpRequest; n.onload = function () {
+                var t = new FileReader;
+                t.onloadend = function () { e(t.result) },
+                    t.readAsDataURL(n.response)
+            },
+                n.open("GET", t),
+                n.responseType = "blob", n.send()
         }
         exportImg({ full: t = !1, scale: e = 3, onLoad: n = (t => t), save: a = !0, backgroundColor: i = "#FAFAFA" } = {}) {
-            const o = this, 
-            r = this.getChartState(), 
-            { svg: d, root: s } = r; 
-            let l = 0; const c = d.selectAll("img"); 
-            let h = c.size(); 
-            const g = () => { JSON.parse(JSON.stringify(o.lastTransform())); 
-                const d = o.duration(); 
-                t && o.fit(); const { svg: l } = o.getChartState(); 
-                setTimeout((t => { 
-                    o.downloadImage({ 
-                        node: l.node(), 
-                        scale: e, 
-                        isSvg: !1, 
-                        backgroundColor: i, 
-                        onAlreadySerialized: t => { 
-                            o.update(s) 
-                        }, 
-                        imageName: r.imageName, 
-                        onLoad: n, save: a 
-                    }) 
-                }), t ? d + 10 : 0) 
-            }; 
-            h > 0 ? c.each((function () { 
-                o.toDataURL(this.src, (t => { 
-                    this.src = t, ++l == h && g() 
-                })) 
-            })) : g() 
+            const o = this,
+                r = this.getChartState(),
+                { svg: d, root: s } = r;
+            let l = 0; const c = d.selectAll("img");
+            let h = c.size();
+            const g = () => {
+                JSON.parse(JSON.stringify(o.lastTransform()));
+                const d = o.duration();
+                t && o.fit(); const { svg: l } = o.getChartState();
+                setTimeout((t => {
+                    o.downloadImage({
+                        node: l.node(),
+                        scale: e,
+                        isSvg: !1,
+                        backgroundColor: i,
+                        onAlreadySerialized: t => {
+                            o.update(s)
+                        },
+                        imageName: r.imageName,
+                        onLoad: n, save: a
+                    })
+                }), t ? d + 10 : 0)
+            };
+            h > 0 ? c.each((function () {
+                o.toDataURL(this.src, (t => {
+                    this.src = t, ++l == h && g()
+                }))
+            })) : g()
         }
-        exportSvg() { 
-            const { svg: t, imageName: e } = this.getChartState(); 
-            return this.downloadImage({ 
-                imageName: e, 
-                node: t.node(), 
-                scale: 3, 
-                isSvg: !0 }), 
-                this 
-            }
-        expandAll() { 
-            const { 
-                allNodes: t, 
-                root: e, 
-                data: n 
-            } = this.getChartState(); 
-            return n.forEach((t => t._expanded = !0)), 
-            this.render(), 
-            this 
+        exportSvg() {
+            const { svg: t, imageName: e } = this.getChartState();
+            return this.downloadImage({
+                imageName: e,
+                node: t.node(),
+                scale: 3,
+                isSvg: !0
+            }),
+                this
         }
-        collapseAll() { 
-            const { allNodes: t, root: e } = this.getChartState(); 
-            return t.forEach((t => t.data._expanded = !1)), 
-            this.initialExpandLevel(0), 
-            this.render(), 
-            this 
+        expandAll() {
+            const {
+                allNodes: t,
+                root: e,
+                data: n
+            } = this.getChartState();
+            return n.forEach((t => t._expanded = !0)),
+                this.render(),
+                this
+        }
+        collapseAll() {
+            const { allNodes: t, root: e } = this.getChartState();
+            return t.forEach((t => t.data._expanded = !1)),
+                this.initialExpandLevel(0),
+                this.render(),
+                this
         }
         downloadImage({ node: t, scale: e = 2, imageName: n = "graph", isSvg: a = !1, save: i = !0, backgroundColor: o = "#FAFAFA", onAlreadySerialized: r = (t => { }), onLoad: d = (t => { }) }) {
-            const s = t; 
-            function l(t, e) { 
-                var n = document.createElement("a"); 
-                "string" == typeof n.download ? (document.body.appendChild(n), 
-                n.download = e, 
-                n.href = t, 
-                n.click(), 
-                document.body.removeChild(n)) : location.replace(t) 
-            } 
+            const s = t;
+            function l(t, e) {
+                var n = document.createElement("a");
+                "string" == typeof n.download ? (document.body.appendChild(n),
+                    n.download = e,
+                    n.href = t,
+                    n.click(),
+                    document.body.removeChild(n)) : location.replace(t)
+            }
             function c(t) {
-                const e = "http://www.w3.org/2000/xmlns/"; t = t.cloneNode(!0); 
-                const n = window.location.href + "#", 
-                a = document.createTreeWalker(t, NodeFilter.SHOW_ELEMENT, null, !1); 
+                const e = "http://www.w3.org/2000/xmlns/"; t = t.cloneNode(!0);
+                const n = window.location.href + "#",
+                    a = document.createTreeWalker(t, NodeFilter.SHOW_ELEMENT, null, !1);
                 for (; a.nextNode();)for (const t of a.currentNode.attributes) t.value.includes(n) && (t.value = t.value.replace(n, "#"));
-                t.setAttributeNS(e, "xmlns", "http://www.w3.org/2000/svg"), 
-                t.setAttributeNS(e, "xmlns:xlink", "http://www.w3.org/1999/xlink");
+                t.setAttributeNS(e, "xmlns", "http://www.w3.org/2000/svg"),
+                    t.setAttributeNS(e, "xmlns:xlink", "http://www.w3.org/1999/xlink");
                 return (new XMLSerializer).serializeToString(t)
-            } 
+            }
             if (a) {
                 let t = c(s);
-                return t = '<?xml version="1.0" standalone="no"?>\r\n' + t, 
-                l(p = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(t), n + ".svg"), 
-                void r()
-            } 
-            const h = e, 
-            g = document.createElement("img"); 
-            g.onload = function () { const t = document.createElement("canvas"), 
-            e = s.getBoundingClientRect(); 
-            t.width = e.width * h, 
-            t.height = e.height * h; 
-            const a = t.getContext("2d"); 
-            a.fillStyle = o, 
-            a.fillRect(0, 0, e.width * h, e.height * h), 
-            a.drawImage(g, 0, 0, e.width * h, e.height * h); 
-            let r = t.toDataURL("image/png"); 
-            d && d(r), i && l(r, n + ".png") }; 
-            var p = "data:image/svg+xml; charset=utf8, " + encodeURIComponent(c(s)); 
+                return t = '<?xml version="1.0" standalone="no"?>\r\n' + t,
+                    l(p = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(t), n + ".svg"),
+                    void r()
+            }
+            const h = e,
+                g = document.createElement("img");
+            g.onload = function () {
+                const t = document.createElement("canvas"),
+                e = s.getBoundingClientRect();
+                t.width = e.width * h,
+                    t.height = e.height * h;
+                const a = t.getContext("2d");
+                a.fillStyle = o,
+                    a.fillRect(0, 0, e.width * h, e.height * h),
+                    a.drawImage(g, 0, 0, e.width * h, e.height * h);
+                let r = t.toDataURL("image/png");
+                d && d(r), i && l(r, n + ".png")
+            };
+            var p = "data:image/svg+xml; charset=utf8, " + encodeURIComponent(c(s));
             r(), g.src = p
-        } getTextWidth(t, { 
-            fontSize: e = 14, 
-            fontWeight: n = 400, 
-            defaultFont: a = "Helvetice", 
-            ctx: i 
+        }
+        getTextWidth(t, {
+            fontSize: e = 14,
+            fontWeight: n = 400,
+            defaultFont: a = "Helvetice",
+            ctx: i
         } = {}) {
             i.font = `${n || ""} ${e}px ${a} `;
             return i.measureText(t).width
-        } 
-        clear() { 
-            const t = this.getChartState(); 
-            d.select(window).on(`resize.${t.id}`, null), 
-            t.svg && t.svg.selectAll("*").remove() 
+        }
+        clear() {
+            const t = this.getChartState();
+            d.select(window).on(`resize.${t.id}`, null),
+                t.svg && t.svg.selectAll("*").remove()
         }
     }, Object.defineProperty(t, "__esModule", { value: !0 })
 }));
