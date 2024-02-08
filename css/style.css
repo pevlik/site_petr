@@ -1,0 +1,107 @@
+      html { 
+        overflow:  hidden; 
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .svg-chart-container {
+        width: 100%;
+      }
+
+      .chart-container {
+        width: 100vh;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+        width: calc(100% - 350px);
+      }
+
+      .details-button {
+        margin-inline-start: 300px;
+        writing-mode: horizontal-tb;
+
+        padding: 3px 6px;
+        background-color: rgb(41, 151, 255);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 10px;
+        transition: background-color 0.3s ease-in-out;
+        align-self: flex-end;
+        z-index: 10000;
+      }
+
+      .details-button:hover {
+        background-color: #45a049;
+      }
+
+      .highlighted {
+        background-color: rgba(255, 255, 200, 0.2) !important;
+      }
+
+      @media screen and (max-width: 768px) {
+        .user-block {
+          padding: 15px;
+        }
+      }
+
+      input {
+        background-image: url(/img/magnifier.svg) !important;
+        background-size: 16px 16px !important;
+        background-repeat: no-repeat !important;
+        background-position: 8px !important;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        font-size: 14px !important;
+        font-family: inherit;
+        line-height: 20px;
+        height: 38px !important;
+        margin: 0 !important;
+        padding: 8px 32px !important;
+        padding-left: 32px !important;
+        right: 0;
+
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-transition: border-color 0.1s;
+        -moz-transition: border-color 0.1s;
+        transition: border-color 0.1s;
+      }
+
+      .employee-tree-sidebar button {
+        width: 236px;
+        padding: 5px;
+        margin-top: 1px; 
+        background-color: rgb(41, 151, 255);
+        color: white;
+        border: solid 1px;
+        border-color: black;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .employee-tree-sidebar {
+        width: 350px;
+        position: relative;
+        float: left;
+        margin-top: 20px;
+      }
+
+      .employee-card {
+        display: none;
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+      }
+

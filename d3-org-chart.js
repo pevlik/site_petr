@@ -32,8 +32,8 @@
                 allowedNodesCount: {},
                 zoomBehavior: null,
                 generateRoot: null,
-                svgWidth: 800,
-                svgHeight: window.innerHeight - 100,
+                svgWidth: window.innerHeight,
+                svgHeight: window.innerHeight,
                 container: "body",
                 data: null,
                 connections: [],
@@ -41,17 +41,18 @@
                 nodeId: t => t.nodeId || t.id,
                 parentNodeId: t => t.parentNodeId || t.parentId,
                 rootMargin: 40,
-                nodeWidth: t => 250,
-                nodeHeight: t => 150,
-                neighbourMargin: (t, e) => 80,
+                nodeWidth: t => 370,
+                nodeHeight: t => 130,
+                neighbourMargin: (t, e) => 20,
                 siblingsMargin: t => 20,
-                childrenMargin: t => 60,
-                compactMarginPair: t => 100,
-                compactMarginBetween: t => 20,
-                nodeButtonWidth: t => 40,
-                nodeButtonHeight: t => 40,
-                nodeButtonX: t => -20,
-                nodeButtonY: t => -20, linkYOffset: 30,
+                childrenMargin: t => 50,
+                compactMarginPair: t => 30,
+                compactMarginBetween: t => 35,
+                nodeButtonWidth: t => 382,
+                nodeButtonHeight: t => 130,
+                nodeButtonX: t => -190,
+                nodeButtonY: t => -126, 
+                linkYOffset: 30,
                 pagingStep: t => 5,
                 minPagingVisibleNodes: t => 2e3,
                 scaleExtent: [.001, 20],
@@ -69,13 +70,20 @@
                 <div style="padding:5px;font-size:10px;">Sample Node(id=${t.id}), override using 
                     <br/> \n            
                     <code>chart.nodeContent({data}=>{ 
-                    <br/>\n             &nbsp;&nbsp;&nbsp;&nbsp;return '' // Custom HTML <br/>\n             })
+                        <br/>\n             
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        return '' // Custom HTML 
+                        <br/>\n             
+                    })
                     </code>\n             
                     <br/> \n             Or check different <a href="https://github.com/bumbeishvili/org-chart#jump-to-examples" target="_blank">layout examples</a>\n             
                 </div>
                 `,
                 buttonContent: ({ node: t, state: e }) => `
-                <div style="position: absolute;border:1px solid #E4E2E9;border-radius:3px;padding:4px;font-size:9px;bottom: -8px;right:179px;margin:auto auto;background-color:white"> 
+                <div style="position: absolute;border:1px solid #E4E2E9;border-radius:3px;padding:4px;font-size:9px;bottom: -8px;right:178px;margin:auto auto;background-color:white"> 
                     ${{
                         left: e => e ? `
                         <div style="display:flex;">
