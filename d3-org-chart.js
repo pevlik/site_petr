@@ -32,7 +32,7 @@
                 allowedNodesCount: {},
                 zoomBehavior: null,
                 generateRoot: null,
-                svgWidth: window.innerHeight,
+                svgWidth: window.innerWidth,
                 svgHeight: window.innerHeight,
                 container: "body",
                 data: null,
@@ -103,7 +103,8 @@
                             </span>
                             <span style="color:#716E7B">${t.data._directSubordinatesPaging} </span>
                         </div>
-                        `, bottom: e => e ? `
+                        `, 
+                        bottom: e => e ? `
                         <div style="display:flex;">
                             <span style="align-items:center;display:flex;">
                                 <svg width="8" height="8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n                       
@@ -160,7 +161,8 @@
                         `}[e.layout](t.children)
                     }  
                 </div>
-                `, pagingButton: (t, e, n, a) => {
+                `, 
+                pagingButton: (t, e, n, a) => {
                     const i = a.pagingStep(t.parent), o = t.parent.data._pagingStep, r = t.parent.data._directSubordinatesPaging - o; return `\n                   
                     <div style="margin-top:90px;">\n                      
                         <div style="display:flex;width:170px;border-radius:20px;padding:5px 15px; padding-bottom:4px;;background-color:#E5E9F2">\n                      

@@ -8,6 +8,19 @@
   </head>
 
   <body>
+    <script>
+      const card_id = document.querySelectorAll('.card_id')
+      const name = document.querySelector('.position')
+      const position = document.querySelector('.name')
+      const email = document.querySelector('.email')
+
+      // Функция для вывода текста в элемент "div" с классом "text-here"
+      function setText(text) {
+        name.innerText = text;
+        position.innerText = text;
+        email.innerText = text;
+      }
+    </script>
     <script src="./d3.v7.min.js"></script>
     <script src="./d3-org-chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
@@ -28,8 +41,17 @@
         <button onclick="chart.clearHighlighting().setCentered(212).setUpToTheRootHighlighted('212').render().fit()">Подсветить 31 отдел</button>
         <button onclick="chart.clearHighlighting().setCentered(234).setUpToTheRootHighlighted('234').render().fit()">Подсветить 34 отдел</button>
         <button onclick="chart.clearHighlighting().setCentered(246).setUpToTheRootHighlighted('246').render().fit()">Подсветить 41 отдел</button>
-        <button onclick="chart.fit()">Отдалить дерево</button>
-        <button onclick="chart.clearHighlighting().setCentered(100).collapseAll().render().fit()">Очистить</button>             
+        <button onclick="chart.fit()">Выровнить дерево</button>
+        <button onclick="chart.clearHighlighting().setCentered(100).collapseAll().render().fit()">Очистить</button>
+        <div class="employee-card">
+          <img src="https://github.com/Potapozavr/Site/blob/main/views/pic/Ilya-1-scaled-200x200.jpg?raw=true" alt="Director Photo">
+          <div class="employee-details">
+            <h2 class="name"></h2>
+            <p class="position">Генеральный директор</p>
+            <p class="">Email: i_vad@petrobalt.ru</p>
+            <p class="email">Телефон: +7 (812) 644 56 86</p>
+          </div>
+        </div>             
       </div>
 
       <div class="chart-container"></div>
@@ -67,6 +89,10 @@
           console.log('filtering chart', e.srcElement.value);
         }
 
+        function showEmployeeDetails() {
+          
+        }
+
         // This is the data used - https://raw.githubusercontent.com/Potapozavr/Site/main/data-oracle.csv
         d3.csv('https://raw.githubusercontent.com/pevlik/site_petr/main/new_data.csv').then((data) => {
           chart = new d3.OrgChart()
@@ -89,17 +115,20 @@
                       height:${d.height - imageDiffVert}px;
                       border-radius:10px;border: 3px solid #E4E2E9">
                       
-                    <div style="display:flex;
+                    <div class="card_id" style="display:flex;
                         justify-content:flex-end;
                         margin-top:5px;
                         margin-right:8px">#${d.data.id}</div>
                     
                     <div style="background-color:${color};
                         margin-top:${-imageDiffVert - 25}px;
-                        margin-left:${15}px;border-radius:100px;
-                        width:45px;height:45px;" ></div>
+                        margin-left:${15}px;
+                        border-radius:100px;
+                        width:45px;
+                        height:45px;" ></div>
                     
-                    <div style="margin-top:${-imageDiffVert - 25}px; width: 75px;">
+                    <div style="margin-top:${-imageDiffVert - 25}px; 
+                        width: 75px;">
                         <img src=" ${d.data.image}" style="
                             margin-left:${5}px;
                             border-radius:100px;
@@ -131,7 +160,7 @@
             })
             .container('.chart-container')
             .data(data)
-            .render();
+            .render();  
         });
         
       </script>
