@@ -8,19 +8,6 @@
   </head>
 
   <body>
-    <script>
-      const card_id = document.querySelectorAll('.card_id')
-      const name = document.querySelector('.position')
-      const position = document.querySelector('.name')
-      const email = document.querySelector('.email')
-
-      // Функция для вывода текста в элемент "div" с классом "text-here"
-      function setText(text) {
-        name.innerText = text;
-        position.innerText = text;
-        email.innerText = text;
-      }
-    </script>
     <script src="./d3.v7.min.js"></script>
     <script src="./d3-org-chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
@@ -28,7 +15,7 @@
     <div class="employee-tree-main">
       <div class="employee-tree-sidebar"> 
         <input type="search" placeholder="Поиск" oninput="filterChart(event)"/>
-        <button onclick='chart.connections([{from:"101",to:"122",label:"Conflicts of interest"}]).render()'>Multi Node Connections</button>
+        <!-- <button onclick='chart.connections([{from:"101",to:"122",label:"Conflicts of interest"}]).render()'>Multi Node Connections</button> -->
         <button onclick="chart.expandAll(true).render().fit()">Раскрыть все дерево</button>
         <button onclick="chart.collapseAll(true).render().fit()">Свернуть дерево</button>
         <button onclick="chart.compact(false).render().fit()">Горизонтально</button>
@@ -43,127 +30,32 @@
         <button onclick="chart.clearHighlighting().setCentered(246).setUpToTheRootHighlighted('246').render().fit()">Подсветить 41 отдел</button>
         <button onclick="chart.fit()">Выровнить дерево</button>
         <button onclick="chart.clearHighlighting().setCentered(100).collapseAll().render().fit()">Очистить</button>
-        <div class="employee-card">
+        <!-- <div class="employee-card">
           <img src="https://github.com/Potapozavr/Site/blob/main/views/pic/Ilya-1-scaled-200x200.jpg?raw=true" alt="Director Photo">
           <div class="employee-details">
             <h2 class="name"></h2>
             <p class="position">Генеральный директор</p>
             <p class="">Email: i_vad@petrobalt.ru</p>
-            <p class="email">Телефон: +7 (812) 644 56 86</p>
+            <p class="email">Телефон: +7 (812) 644 56 8</p>
           </div>
-        </div>             
+        </div> -->
+        <script>
+          const card_id = document.querySelectorAll('.card_id')
+          const name = document.querySelector('.position')
+          const position = document.querySelector('.name')
+          const email = document.querySelector('.email')
+    
+          // Функция для вывода текста в элемент "div" с классом "text-here"
+          function setText(text) {
+            name.innerText = text;
+            position.innerText = text;
+            email.innerText = text;
+          }
+        </script>             
       </div>
 
       <div class="chart-container"></div>
-      
-      <script>
-        let chart;
-
-        function filterChart(e) {
-          // Get input value
-          const value = e.srcElement.value;
-
-          // Clear previous highlighting
-          chart.clearHighlighting();
-
-          // Get chart nodes
-          const data = chart.data();
-
-          // Mark all previously expanded nodes for collapse
-          data.forEach((d) => (d._expanded = false));
-
-          // Loop over data and check if input value matches any name or position
-          data.forEach((d) => {
-            const nameMatches = value !== '' && d.name.toLowerCase().includes(value.toLowerCase());
-            const positionMatches = value !== '' && d.position.toLowerCase().includes(value.toLowerCase());
-
-            // If matches either name or position, mark node as highlighted
-            if (nameMatches || positionMatches) {
-              d._highlighted = true;
-              d._expanded = true;
-            }
-          })
-
-          // Update data and rerender graph
-          chart.data(data).render().fit();
-          console.log('filtering chart', e.srcElement.value);
-        }
-
-        function showEmployeeDetails() {
-          
-        }
-
-        // This is the data used - https://raw.githubusercontent.com/Potapozavr/Site/main/data-oracle.csv
-        d3.csv('https://raw.githubusercontent.com/pevlik/site_petr/main/new_data.csv').then((data) => {
-          chart = new d3.OrgChart()
-            .nodeContent(function (d, i, arr, state) {
-              const color = '#FFFFFF';
-              const imageDiffVert = 25 + 2;
-              
-              return `
-
-                <div style='width:${d.width}px;
-                  height:${d.height}px;
-                  padding-top:${imageDiffVert - 2}px;
-                  padding-left:1px;
-                  padding-right:1px'>
-
-                  <div style="font-family: 'Inter', sans-serif;
-                      background-color:${color};
-                      margin-left:-1px;
-                      width:${d.width - 2}px;
-                      height:${d.height - imageDiffVert}px;
-                      border-radius:10px;border: 3px solid #E4E2E9">
-                      
-                    <div class="card_id" style="display:flex;
-                        justify-content:flex-end;
-                        margin-top:5px;
-                        margin-right:8px">#${d.data.id}</div>
-                    
-                    <div style="background-color:${color};
-                        margin-top:${-imageDiffVert - 25}px;
-                        margin-left:${15}px;
-                        border-radius:100px;
-                        width:45px;
-                        height:45px;" ></div>
-                    
-                    <div style="margin-top:${-imageDiffVert - 25}px; 
-                        width: 75px;">
-                        <img src=" ${d.data.image}" style="
-                            margin-left:${5}px;
-                            border-radius:100px;
-                            width:60px;
-                            height:60px;" />
-                    </div>
-                    
-                    <div style="font-size:15px;
-                        color:#08011E;
-                        text-align: center">${d.data.name} </div>
-                    
-                    <div style="color:#716E7B;
-                        margin-top:3px;
-                        text-align: center;
-                        font-size:15px;"> ${d.data.position} </div>
-                                        
-                  </div>
-                  
-                </div>
-                <div style="text-align:center; margin-top:-15px; margin-left: 294px">
-                  <button 
-                  style="background-color: rgb(41, 151, 255); 
-                  border-radius: 5px; border: solid 2px #808080; 
-                  color: white; 
-                  cursor: pointer" 
-                  onclick="(event.target.innerText === 'Подробно') ? showEmployeeDetails(${JSON.stringify(d.data).split('"').join("&quot;")}) : hideEmployeeDetails()")">Подробно</button>
-                </div>
-              `;
-            })
-            .container('.chart-container')
-            .data(data)
-            .render();  
-        });
-        
-      </script>
+      <script src="./chart_scr.js"></script>
 
       <g class="connections-wrapper"><path class="connection" d="M-877,625C121,625,121,270,1119,270" fill="none" stroke="#E27396" stroke-linecap="round" stroke-width="5" pointer-events="none" marker-start="url(#145_201)" marker-end="url(#arrow-145_201)"></path></g>
     </div>
