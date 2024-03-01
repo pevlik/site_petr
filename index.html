@@ -28,36 +28,25 @@
         <button onclick="chart.clearHighlighting().setCentered(212).setUpToTheRootHighlighted('212').render().fit()">Подсветить 31 отдел</button>
         <button onclick="chart.clearHighlighting().setCentered(234).setUpToTheRootHighlighted('234').render().fit()">Подсветить 34 отдел</button>
         <button onclick="chart.clearHighlighting().setCentered(246).setUpToTheRootHighlighted('246').render().fit()">Подсветить 41 отдел</button>
-        <button onclick="chart.fit()">Выровнить дерево</button>
+        <button onclick="chart.fit()">Выровнять дерево</button>
         <button onclick="chart.clearHighlighting().setCentered(100).collapseAll().render().fit()">Очистить</button>
-        <!-- <div class="employee-card">
-          <img src="https://github.com/Potapozavr/Site/blob/main/views/pic/Ilya-1-scaled-200x200.jpg?raw=true" alt="Director Photo">
-          <div class="employee-details">
-            <h2 class="name"></h2>
-            <p class="position">Генеральный директор</p>
-            <p class="">Email: i_vad@petrobalt.ru</p>
-            <p class="email">Телефон: +7 (812) 644 56 8</p>
-          </div>
-        </div> -->
-        <script>
-          const card_id = document.querySelectorAll('.card_id')
-          const name = document.querySelector('.position')
-          const position = document.querySelector('.name')
-          const email = document.querySelector('.email')
-    
-          // Функция для вывода текста в элемент "div" с классом "text-here"
-          function setText(text) {
-            name.innerText = text;
-            position.innerText = text;
-            email.innerText = text;
-          }
-        </script>             
       </div>
 
       <div class="chart-container"></div>
       <script src="./chart_scr.js"></script>
 
-      <g class="connections-wrapper"><path class="connection" d="M-877,625C121,625,121,270,1119,270" fill="none" stroke="#E27396" stroke-linecap="round" stroke-width="5" pointer-events="none" marker-start="url(#145_201)" marker-end="url(#arrow-145_201)"></path></g>
+      <g class="connections-wrapper">
+        <path class="connection" 
+          d="M-877,625C121,625,121,270,1119,270" 
+          fill="none" 
+          stroke="#E27396" 
+          stroke-linecap="round" 
+          stroke-width="5" 
+          pointer-events="none" 
+          marker-start="url(#145_201)" 
+          marker-end="url(#arrow-145_201)">
+        </path>
+      </g>
     </div>
   </body>
 

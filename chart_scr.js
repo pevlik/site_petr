@@ -1,6 +1,7 @@
 
 let chart;
 
+// Функция работы поиска
 function filterChart(e) {
     // Get input value
     const value = e.srcElement.value;
@@ -31,6 +32,7 @@ function filterChart(e) {
     console.log('filtering chart', e.srcElement.value);
 }
 
+// Функция открытия/скрытия карточки сотрудника
 function showEmployeeDetails() {
 
 }
@@ -42,18 +44,18 @@ d3.csv('https://raw.githubusercontent.com/pevlik/site_petr/main/new_data.csv').t
             const color = '#FFFFFF';
             const imageDiffVert = 25 + 2;
 
-            return `
-            <div class="employee-card ${d.data.id}" style="display: block">
-            <img src="${d.data.image}" alt="photo">
-            <div class="employee-details">
-                <h2>${d.data.position}</h2>
-                <p>${d.data.name}</p>
-                <p>Email: ${d.data.email}</p>
-                <p>Телефон: ${d.data.phone}</p>
-            </div>
-            <!-- <a href="3333.html" class="back-button" style="text-align: center;">Назад к структурной схеме бюро</a> -->
-        </div>
+                // <div class="employee-card ${d.data.id}" style="display: block">
+                //     <img src="${d.data.image}" alt="photo">
+                //     <div class="employee-details">
+                //         <h2>${d.data.position}</h2>
+                //         <p>${d.data.name}</p>
+                //         <p>Email: ${d.data.email}</p>
+                //         <p>Телефон: ${d.data.phone}</p>
+                //     </div>
+                //     <!-- <a href="3333.html" class="back-button" style="text-align: center;">Назад к структурной схеме бюро</a> -->
+                // </div>
 
+            return `
                 <div style='width:${d.width}px;
                   height:110px;
                   padding-top:${imageDiffVert - 2}px;
@@ -103,17 +105,13 @@ d3.csv('https://raw.githubusercontent.com/pevlik/site_petr/main/new_data.csv').t
                     </div>
                                         
                   </div>
-                  <div style="text-align:center; margin-top:-15px; margin-left: 294px">
-                    <button 
-                    style="background-color: rgb(41, 151, 255); 
-                    border-radius: 5px; border: solid 2px #808080; 
-                    color: white; 
-                    cursor: pointer;
-                    margin-top: 20px" 
-                    onclick="(event.target.innerText === 'Подробно') ? showEmployeeDetails(${JSON.stringify(d.data).split('"').join("&quot;")}) : hideEmployeeDetails()")">Подробно</button>
-                  </div>
+                  
                 </div>
               `;
+            //   <div style="text-align:center; margin-top:-15px; margin-left: 274px">
+            //         <button class="emp-info" onclick="console.log('нажата кнопка с id', '${d.data.id}')">Подробно</button>
+            //       </div> 
+              //(event.target.innerText === 'Подробно') ? showEmployeeDetails(${JSON.stringify(d.data).split('"').join("&quot;")}) : hideEmployeeDetails()")
         })
         .container('.chart-container')
         .data(data)
