@@ -42,7 +42,7 @@
                 parentNodeId: t => t.parentNodeId || t.parentId,
                 rootMargin: 40,
                 nodeWidth: t => 370,
-                nodeHeight: t => 130,
+                nodeHeight: t => 155,
                 neighbourMargin: (t, e) => 20,
                 siblingsMargin: t => 20,
                 childrenMargin: t => 50,
@@ -1078,10 +1078,11 @@
         collapseAll() {
             const { allNodes: t, root: e } = this.getChartState();
             return t.forEach((t => t.data._expanded = !1)),
-                this.initialExpandLevel(0),
+                this.initialExpandLevel(1),
                 this.render(),
                 this
         }
+        
         downloadImage({ node: t, scale: e = 2, imageName: n = "graph", isSvg: a = !1, save: i = !0, backgroundColor: o = "#FAFAFA", onAlreadySerialized: r = (t => { }), onLoad: d = (t => { }) }) {
             const s = t;
             function l(t, e) {

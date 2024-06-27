@@ -18,7 +18,7 @@ id,parentId,position,name,image,email,phone_number,address,cabinet
 116,110,Ведущий конструктор автоматики,Чернев Петр Викторович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Чернев Петр Викторович.jpg,P_Chernev@petrobalt.ru,,Удаленно,
 117,103,Управление главных конструкторов,,,,,,
 118,117,Главный конструктор проекта,Антонов Кирилл Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Антонов Кирилл Владимирович.jpg,Antonov.Kirill@petrobalt.ru,,,
-119,117,Главный конструктор проекта,Шевченко Игорь Витальевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Шевченко Игорь Витальевич.jpg,I_Shevchenko@petrobalt.ru,,БЦ Межевой,
+119,117,Главный конструктор проекта,Шевченко Игорь Витальевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Шевченко Игорь Витальевич.jpg,I_Shevchenko@petrobalt.ru,,БЦ Морской Центр,
 120,117,Заместитель главного конструктора бюро,Девятериков Алексей Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Девятериков Алексей Сергеевич.jpg,a_devyaterikov@petrobalt.ru,,Карташихина 1-3,каб. 109
 121,117,Заместитель главного конструктора бюро,Дегтярев Валентин Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Дегтярев Валентин Владимирович.jpg,v_degtyarev@petrobalt.ru,,Карташихина 1-3,каб. 107
 122,117,Заместитель главного конструктора бюро,Титов Денис Анатольевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Титов Денис Анатольевич.jpg,D_Titov@petrobalt.ru,,Карташихина 1-3,каб. 109
@@ -58,21 +58,21 @@ id,parentId,position,name,image,email,phone_number,address,cabinet
 157,109,Корпусный отдел (21 отдел),,,,,,
 158,157,Руководитель проекта,Королева Наталья Станиславовна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Королева Наталья Станиславовна.jpg,Koroleva@petrobalt.ru,,Удаленно,
 159,157,Инженер-конструктор 1 категории,Баранов Николай Александрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Баранов Николай Александрович.jpg,N_Baranov@petrobalt.ru,,Карташихина 1-3,каб. 204
-160,157,техник,Антонов Петр Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Антонов Петр Владимирович.jpg,,,БЦ Межевой,
+160,157,техник,Антонов Петр Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Антонов Петр Владимирович.jpg,,,БЦ Морской Центр,
 161,157,Техник,Баранов Алексей Станиславович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Баранов Алексей Станиславович.jpg,,,Карташихина 1-3,каб. 205
 162,157,Инженер-конструктор 2 категории,Боков Денис Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Боков Денис Сергеевич.jpg,D_Bokov@petrobalt.ru,,Карташихина 1-3,каб. 204
-163,157,Техник,Бровченко Арсений Дмитриевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бровченко Арсений Дмитриевич.jpg,A_Brovchenko@petrobalt.ru,,БЦ Межевой,
+163,157,Техник,Бровченко Арсений Дмитриевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бровченко Арсений Дмитриевич.jpg,A_Brovchenko@petrobalt.ru,,БЦ Морской Центр,
 164,157,Ведущий инженер-конструктор,Валишева Амина Руслановна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Валишева Амина Руслановна.jpg,Valisheva.Amina@petrobalt.ru,,Карташихина 1-3,каб. 206
 165,157,Ведущий инженер-конструктор,Волженина Оксана Владимировна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Волженина Оксана Владимировна.jpg,,,Удаленно,
 166,157,Начальник отдела,Гаврилов Александр Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Гаврилов Александр Сергеевич.jpg,A_Gavrilov@petrobalt.ru,,Карташихина 1-3,каб. 204
-167,157,Инженер-Конструктор 2 категории,Григорович Артем Григорьевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Григорович Артем Григорьевич.jpg,A_Grigorovich@petrobalt.ru,,БЦ Межевой,
+167,157,Инженер-Конструктор 2 категории,Григорович Артем Григорьевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Григорович Артем Григорьевич.jpg,A_Grigorovich@petrobalt.ru,,БЦ Морской Центр,
 168,157,Техник,Джишкариани Георгий Валерьевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Джишкариани Георгий Валерьевич.jpg,g_jishkariani@petrobalt.ru,,Карташихина 1-3,каб. 205
 169,157,Инженер-конструктор 1 категории,Жемчугова Светлана Юрьевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Жемчугова Светлана Юрьевна.jpg,S_Zhemchugova@petrobalt.ru,,Карташихина 1-3,каб. 205
-170,157,Техник,Захаров Родион Олегович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Захаров Родион Олегович.jpg,r_zakharov@petrobalt.ru,,БЦ Межевой,
+170,157,Техник,Захаров Родион Олегович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Захаров Родион Олегович.jpg,r_zakharov@petrobalt.ru,,БЦ Морской Центр,
 171,157,Инженер-Конструктор 2 категории,Зуев Владислав Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Зуев Владислав Владимирович.jpg,V_Zuev@petrobalt.ru,,Удаленно,
 172,157,Инженер-конструктор 1 категории,Игнатова Елена Сергеевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Игнатова Елена Сергеевна.jpg,e_ignatova@petrobalt.ru,,Карташихина 1-3,каб. 204
 173,157,Инженер-конструктор 1 категории,Измайлова Валентина Александровна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Измайлова Валентина Александровна.jpg,V_Izmaylova@petrobalt.ru,,Карташихина 1-3,каб. 204
-174,157,Техник,Калинина Вероника Валерьевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Калинина Вероника Валерьевна.jpg,,,БЦ Межевой,
+174,157,Техник,Калинина Вероника Валерьевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Калинина Вероника Валерьевна.jpg,,,БЦ Морской Центр,
 175,157,Ведущий инженер-конструктор,Кисленко Анна Сергеевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Кисленко Анна Сергеевна.jpg,,,Карташихина 1-3,
 176,157,Инженер-конструктор 3 категории,Колесников Михаил Александрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Колесников Михаил Александрович.jpg,M_Kolesnikov@petrobalt.ru,,Карташихина 1-3,каб. 205
 177,157,Ведущий инженер-конструктор,Котиков Борис Викторович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Котиков Борис Викторович.jpg,B_Kotikov@petrobalt.ru,,Карташихина 1-3,каб. 205
@@ -84,35 +84,35 @@ id,parentId,position,name,image,email,phone_number,address,cabinet
 183,157,Начальник сектора,Пофланкова Елена Владимировна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Пофланкова Елена Владимировна.jpg,Poflankova.Elena@petrobalt.ru,,Карташихина 1-3,каб. 104
 184,157,Инженер-Конструктор 2 категории,Похитонов Григорий Алексеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Похитонов Григорий Алексеевич.jpg,G_Pohitonov@petrobalt.ru,,Карташихина 1-3,каб. 204
 185,157,практикант,Прялухина Мария Алексеевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Прялухина Мария Алексеевна.jpg,,,Карташихина 1-3,каб. 205
-186,157,Инженер-конструктор 1 категории,Рахлеев Иван Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Рахлеев Иван Сергеевич.jpg,i_rahleev@petrobalt.ru,,БЦ Межевой,
+186,157,Инженер-конструктор 1 категории,Рахлеев Иван Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Рахлеев Иван Сергеевич.jpg,i_rahleev@petrobalt.ru,,БЦ Морской Центр,
 187,157,Инженер-конструктор 1 категории,Тарица Екатерина Георгиевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Тарица Екатерина Георгиевна.jpg,Taritsa.Ekaterina@petrobalt.ru,,Карташихина 1-3,каб. 204
 188,157,Ведущий инженер-конструктор,Топчий Татьяна Петровна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Топчий Татьяна Петровна.jpg,t_topchiy@petrobalt.ru,,,
 189,157,Инженер-Конструктор 2 категории,Тряпицына Ирина Ивановна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Тряпицына Ирина Ивановна.jpg,Tryapitsyna.Irina@petrobalt.ru,,Карташихина 1-3,каб. 104
-190,157,Ведущий инженер-конструктор,Фокин Алексей Иванович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Фокин Алексей Иванович.jpg,A_Fokin@petrobalt.ru,,БЦ Межевой,
+190,157,Ведущий инженер-конструктор,Фокин Алексей Иванович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Фокин Алексей Иванович.jpg,A_Fokin@petrobalt.ru,,БЦ Морской Центр,
 191,157,Ведущий инженер-конструктор,Шевелкин Юрий Иванович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Шевелкин Юрий Иванович.jpg,Shevelkin.Yury@petrobalt.ru,,Удаленно,
 192,109,Отдле достройки (22 отдел),Титов Евгений Михайлович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Титов Евгений Михайлович.jpg,Titov.Evgeny@petrobalt.ru,,Карташихина 1-3,каб. 309
 193,192,Ведущий инженер-конструктор,Захаров Юрий Юрьевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Захаров Юрий Юрьевич.jpg,Yu_Zaharov@petrobalt.ru,,Карташихина 1-3,каб. 307
 194,192,Ведущий инженер-конструктор,Калашников Алексей Святославович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Калашников Алексей Святославович.jpg,A_Kalashnikov@petrobalt.ru,,Карташихина 1-3,каб. 307
-195,192,Ведущий инженер-конструктор,Маурин Аркадий Игоревич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Маурин Аркадий Игоревич.jpg,A_Maurin@petrobalt.ru,,БЦ Межевой,
-196,192,Ведущий инженер-конструктор,Набок Артем Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Набок Артем Владимирович.jpg,A_Nabok@petrobalt.ru,,БЦ Межевой,
+195,192,Ведущий инженер-конструктор,Маурин Аркадий Игоревич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Маурин Аркадий Игоревич.jpg,A_Maurin@petrobalt.ru,,БЦ Морской Центр,
+196,192,Ведущий инженер-конструктор,Набок Артем Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Набок Артем Владимирович.jpg,A_Nabok@petrobalt.ru,,БЦ Морской Центр,
 197,192,Ведущий инженер-конструктор,Перетрухина Ксения Юрьевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Перетрухина Ксения Юрьевна.jpg,K_Peretrukhina@petrobalt.ru,,Карташихина 1-3,каб. 307
 198,192,Инженер-конструктор,Гранковский Ростислав Русланович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Гранковский Ростислав Русланович.jpg,,,Карташихина 1-3,каб. 307
 199,192,Инженер-конструктор 1 категории,Крылова Анастасия Владиславовна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Крылова Анастасия Владиславовна.jpg,A_Krylova@petrobalt.ru,,Карташихина 1-3,каб. 307
 200,192,Инженер-конструктор 1 категории,Прищепов Павел Борисович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Прищепов Павел Борисович.jpg,P_Prischepov@petrobalt.ru,,Карташихина 1-3,каб. 206
 201,192,Инженер-конструктор 2 категории,Набойщиков Виталий Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Набойщиков Виталий Сергеевич.jpg,V_NABOISHCHIKOV@petrobalt.ru,,Карташихина 1-3,каб. 307
-202,192,Инженер-конструктор 3 категории,Бондарь Андрей Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бондарь Андрей Владимирович.jpg,,,БЦ Межевой,
+202,192,Инженер-конструктор 3 категории,Бондарь Андрей Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бондарь Андрей Владимирович.jpg,,,БЦ Морской Центр,
 203,192,Инженер-конструктор 3 категории,Сульдина Алина Андреевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Сульдина Алина Андреевна.jpg,A_Suldina@petrobalt.ru,,Карташихина 1-3,
-204,192,Инженер-Конструктор 3 категории,Стефаненко Диана Андреевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Стефаненко Диана Андреевна.jpg,D_Stefanenko@petrobalt.ru,,БЦ Межевой,
+204,192,Инженер-Конструктор 3 категории,Стефаненко Диана Андреевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Стефаненко Диана Андреевна.jpg,D_Stefanenko@petrobalt.ru,,БЦ Морской Центр,
 206,192,Техник,Плющева Полина Андреевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Плющева Полина Андреевна.jpg,,,Карташихина 1-3,каб. 304
-207,192,Техник,Смирнов Никита Денисович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Смирнов Никита Денисович.jpg,,,БЦ Межевой,
+207,192,Техник,Смирнов Никита Денисович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Смирнов Никита Денисович.jpg,,,БЦ Морской Центр,
 208,192,Техник,Ульянов Дмитрий Андреевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Ульянов Дмитрий Андреевич.jpg,D_Ulyanov@petrobalt.ru,,Карташихина 1-3,каб. 307
-209,109,Отдел прочности и технологии конструкционных материалов (24 отдел),Антонов Кирилл Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Антонов Кирилл Владимирович.jpg,Antonov.Kirill@petrobalt.ru,,БЦ Межевой,
-211,209,Начальник сектора,Иванов Егор Витальевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Иванов Егор Витальевич.jpg,E_Ivanov@petrobalt.ru,,БЦ Межевой,
-212,209,Начальник сектора,Сергеева Юлия Игоревна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Сергеева Юлия Игоревна.jpg,j_sergeeva@petrobalt.ru,,БЦ Межевой,
-213,209,Инженер-конструктор 2 категории,Гежа Дарья Викторовна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Гежа Дарья Викторовна.jpg,D_Gezha@petrobalt.ru,,БЦ Межевой,
-214,209,Инженер-конструктор 3 категории,Виноградов Юрий Валерьевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Виноградов Юрий Валерьевич.jpg,Y_Vinogradov@petrobalt.ru,,БЦ Межевой,
-215,209,Инженер-конструктор 3 категории,Радченко Любовь Владимировна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Радченко Любовь Владимировна.jpg,L_Radchenko@petrobalt.ru,,БЦ Межевой,
-216,209,Техник,Кириллов-Алексеев Павел Анатольевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Кириллов-Алексеев Павел Анатольевич.jpg,kirillov-alekseev@petrobalt.ru,,БЦ Межевой,
+209,109,Отдел прочности и технологии конструкционных материалов (24 отдел),Антонов Кирилл Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Антонов Кирилл Владимирович.jpg,Antonov.Kirill@petrobalt.ru,,БЦ Морской Центр,
+211,209,Начальник сектора,Иванов Егор Витальевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Иванов Егор Витальевич.jpg,E_Ivanov@petrobalt.ru,,БЦ Морской Центр,
+212,209,Начальник сектора,Сергеева Юлия Игоревна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Сергеева Юлия Игоревна.jpg,j_sergeeva@petrobalt.ru,,БЦ Морской Центр,
+213,209,Инженер-конструктор 2 категории,Гежа Дарья Викторовна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Гежа Дарья Викторовна.jpg,D_Gezha@petrobalt.ru,,БЦ Морской Центр,
+214,209,Инженер-конструктор 3 категории,Виноградов Юрий Валерьевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Виноградов Юрий Валерьевич.jpg,Y_Vinogradov@petrobalt.ru,,БЦ Морской Центр,
+215,209,Инженер-конструктор 3 категории,Радченко Любовь Владимировна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Радченко Любовь Владимировна.jpg,L_Radchenko@petrobalt.ru,,БЦ Морской Центр,
+216,209,Техник,Кириллов-Алексеев Павел Анатольевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Кириллов-Алексеев Павел Анатольевич.jpg,kirillov-alekseev@petrobalt.ru,,БЦ Морской Центр,
 217,109,Отдел судовых систем и систем СЭУ (31 отдел),Марченко Семен Александрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Марченко Семен Александрович.jpg,s_marchenko@petrobalt.ru,,,каб. 304
 219,217,Начальник сектора,Бубнова Елена Владимировна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бубнова Елена Владимировна.jpg,Bubnova.Elena@petrobalt.ru,,Карташихина 1-3,каб. 304
 220,217,Начальник сектора,Огородников Евгений Николаевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Огородников Евгений Николаевич.jpg,E_Ogorodnikov@petrobalt.ru,,,
@@ -122,33 +122,33 @@ id,parentId,position,name,image,email,phone_number,address,cabinet
 224,217,Ведущий инженер-конструктор,Залогина Анна Александровна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Залогина Анна Александровна.jpg,Zalogina.Anna@petrobalt.ru,,Карташихина 1-3,каб. 102
 225,217,Ведущий инженер-конструктор,Климович Дмитрий Викторович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Климович Дмитрий Викторович.jpg,D_Klimovich@petrobalt.ru,,Карташихина 1-3,каб. 102
 226,217,Ведущий инженер-конструктор,Кочеров Виталий Борисович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Кочеров Виталий Борисович.jpg,V_Kocherov@petrobalt.ru,,Карташихина 1-3,каб. 102
-227,217,Ведущий инженер-конструктор,Максимов Илья Борисович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Максимов Илья Борисович.jpg,i_maksimov@petrobalt.ru,,БЦ Межевой,
+227,217,Ведущий инженер-конструктор,Максимов Илья Борисович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Максимов Илья Борисович.jpg,i_maksimov@petrobalt.ru,,БЦ Морской Центр,
 228,217,Ведущий инженер-конструктор,Медведев Андрей Леонидович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Медведев Андрей Леонидович.jpg,A_Medvedev@petrobalt.ru,,Карташихина 1-3,каб. 104
 229,217,Ведущий инженер-конструктор,Стрельникова Диана Борисовна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Стрельникова Диана Борисовна.jpg,D_Strelnikova@petrobalt.ru,,Карташихина 1-3,каб. 304
 230,217,Инженер-конструктор 1 категории,Королева Юлия Сергеевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Королева Юлия Сергеевна.jpg,,,Карташихина 1-3,каб. 102
-231,217,Инженер-Конструктор 2 категории,Андреев Артём Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Андреев Артём Сергеевич.jpg,A_Andreev@petrobalt.ru,,БЦ Межевой,
+231,217,Инженер-Конструктор 2 категории,Андреев Артём Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Андреев Артём Сергеевич.jpg,A_Andreev@petrobalt.ru,,БЦ Морской Центр,
 232,217,Инженер-Конструктор 2 категории,Будников Михаил Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Будников Михаил Владимирович.jpg,M_Budnikov@petrobalt.ru,,Карташихина 1-3,каб. 304
-233,217,Инженер-Конструктор 2 категории,Меницкий Владислав Витальевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Меницкий Владислав Витальевич.jpg,v_menitsky@petrobalt.ru,,БЦ Межевой,
+233,217,Инженер-Конструктор 2 категории,Меницкий Владислав Витальевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Меницкий Владислав Витальевич.jpg,v_menitsky@petrobalt.ru,,БЦ Морской Центр,
 234,217,Инженер-Конструктор 2 категории,Морозов Иван Иванович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Морозов Иван Иванович.jpg,I_Morozov@petrobalt.ru,,Карташихина 1-3,каб. 304
 235,217,Инженер-конструктор 3 категории,Ивановский Павел Дмитриевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Ивановский Павел Дмитриевич.jpg,p_ivanovsky@petrobalt.ru,,Карташихина 1-3,каб. 304
 236,217,Инженер-Конструктор 3 категории,Нестеренко Анастасия Евгеньевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Нестеренко Анастасия Евгеньевна.jpg,,,Карташихина 1-3,каб. 304
-237,217,Инженер-Конструктор 3 категории,Опалева Надежда Алексеевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Опалева Надежда Алексеевна.jpg,,,БЦ Межевой,
-238,217,Техник,Андриевский Владислав Александрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Андриевский Владислав Александрович.jpg,,,БЦ Межевой,
-239,217,Техник,Бабалиев Айдер Русланович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бабалиев Айдер Русланович.jpg,,,БЦ Межевой,
-240,217,Техник,Булин Алексей Алексеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Булин Алексей Алексеевич.jpg,,,БЦ Межевой,
-241,217,техник,Бударков Дмитрий Александрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бударков Дмитрий Александрович.jpg,,,БЦ Межевой,
+237,217,Инженер-Конструктор 3 категории,Опалева Надежда Алексеевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Опалева Надежда Алексеевна.jpg,,,БЦ Морской Центр,
+238,217,Техник,Андриевский Владислав Александрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Андриевский Владислав Александрович.jpg,,,БЦ Морской Центр,
+239,217,Техник,Бабалиев Айдер Русланович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бабалиев Айдер Русланович.jpg,,,БЦ Морской Центр,
+240,217,Техник,Булин Алексей Алексеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Булин Алексей Алексеевич.jpg,,,БЦ Морской Центр,
+241,217,техник,Бударков Дмитрий Александрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бударков Дмитрий Александрович.jpg,,,БЦ Морской Центр,
 242,109,Отдел судовых устройств и дельных вещей (34 отдел),,,,,,
 243,242,Начальник отдела,Мурзак Сергей Валерьевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Мурзак Сергей Валерьевич.jpg,S_Murzak@petrobalt.ru,,Карташихина 1-3,каб. 305
 244,242,Ведущий инженер-конструктор,Тарасов Сергей Дмитриевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Тарасов Сергей Дмитриевич.jpg,S_Tarasov@petrobalt.ru,,Карташихина 1-3,каб. 305
 245,242,инженер-конструктор,Крылов Андрей Александрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Крылов Андрей Александрович.jpg,,,Карташихина 1-3,каб. 305
-246,242,Инженер-конструктор 1 категории,Бойков Петр Денисович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бойков Петр Денисович.jpg,p_boikov@petrobalt.ru,,БЦ Межевой,
-247,242,Инженер-конструктор 1 категории,Карягин Владислав Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Карягин Владислав Владимирович.jpg,V_Karyagin@petrobalt.ru,,БЦ Межевой,
+246,242,Инженер-конструктор 1 категории,Бойков Петр Денисович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бойков Петр Денисович.jpg,p_boikov@petrobalt.ru,,БЦ Морской Центр,
+247,242,Инженер-конструктор 1 категории,Карягин Владислав Владимирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Карягин Владислав Владимирович.jpg,V_Karyagin@petrobalt.ru,,БЦ Морской Центр,
 248,242,Инженер-конструктор 1 категории,Перегоненко Сергей Юрьевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Перегоненко Сергей Юрьевич.jpg,a_peregonenko@petrobalt.ru,,Карташихина 1-3,каб. 305
 249,242,Инженер-конструктор 1 категории,Сальманов Игорь Станиславович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Сальманов Игорь Станиславович.jpg,i_salmanov@petrobalt.ru,,Карташихина 1-3,каб. 305
 250,242,Инженер-Конструктор 2 категории,Григорьев Антон Викторович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Григорьев Антон Викторович.jpg,A_grigoriev@petrobalt.ru,,Карташихина 1-3,каб. 305
 251,242,Инженер-конструктор 3 категории,Семчишин Сергей Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Семчишин Сергей Сергеевич.jpg,,,Карташихина 1-3,каб. 305
 252,242,Руководитель группы сопровождения,Копосов Александр Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Копосов Александр Сергеевич.jpg,A_Koposov@petrobalt.ru,,,
-253,242,Техник,Агеев Ильдан Радмирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Агеев Ильдан Радмирович.jpg,,,БЦ Межевой,
+253,242,Техник,Агеев Ильдан Радмирович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Агеев Ильдан Радмирович.jpg,,,БЦ Морской Центр,
 254,109,Электротехнический Отдел (41 отдел),,,,,,
 255,254,Ведущий инженер-конструктор,Блинков Александр Юрьевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Блинков Александр Юрьевич.jpg,A_Blinkov@petrobalt.ru,,Карташихина 1-3,каб. 207
 256,254,Ведущий инженер-конструктор,Зайцев Дмитрий Петрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Зайцев Дмитрий Петрович.jpg,D_Zaytcev@petrobalt.ru,,Карташихина 1-3,каб. 207

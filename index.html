@@ -1,55 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Структурная схема бюро</title>
+</head>
 
-  <body>
-    <script src="./d3.v7.min.js"></script>
-    <script src="./d3-org-chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
+<body>
 
-    <div class="employee-tree-main">
-      <div class="employee-tree-sidebar"> 
-        <input type="search" placeholder="Поиск" oninput="filterChart(event)"/>
-        <!-- <button onclick='chart.connections([{from:"101",to:"122",label:"Conflicts of interest"}]).render()'>Multi Node Connections</button> -->
-        <button onclick="chart.expandAll(true).render().fit()">Раскрыть все дерево</button>
-        <button onclick="chart.collapseAll(true).render().fit()">Свернуть дерево</button>
-        <button onclick="chart.compact(false).render().fit()">Горизонтально</button>
-        <button onclick="chart.compact(true).render().fit()">Вертикально</button>
-        <button onclick="chart.clearHighlighting().setCentered(133).setUpToTheRootHighlighted('133').render().fit()">Подсветить 10 отдел</button>
-        <button onclick="chart.clearHighlighting().setCentered(148).setUpToTheRootHighlighted('148').render().fit()">Подсветить 14 отдел</button>
-        <button onclick="chart.clearHighlighting().setCentered(150).setUpToTheRootHighlighted('150').render().fit()">Подсветить 21 отдел</button>
-        <button onclick="chart.clearHighlighting().setCentered(186).setUpToTheRootHighlighted('186').render().fit()">Подсветить 22 отдел</button>
-        <button onclick="chart.clearHighlighting().setCentered(202).setUpToTheRootHighlighted('202').render().fit()">Подсветить 24 отдел</button>
-        <button onclick="chart.clearHighlighting().setCentered(212).setUpToTheRootHighlighted('212').render().fit()">Подсветить 31 отдел</button>
-        <button onclick="chart.clearHighlighting().setCentered(234).setUpToTheRootHighlighted('234').render().fit()">Подсветить 34 отдел</button>
-        <button onclick="chart.clearHighlighting().setCentered(246).setUpToTheRootHighlighted('246').render().fit()">Подсветить 41 отдел</button>
-        <button onclick="chart.fit()">Отцентровать дерево</button>
-        <button onclick="chart.clearHighlighting().setCentered(100).collapseAll().render().fit()">Очистить</button>
-        <script>
-          const card_id = document.querySelectorAll('.card_id')
-          const name = document.querySelector('.position')
-          const position = document.querySelector('.name')
-          const email = document.querySelector('.email')
-    
-          // Функция для вывода текста в элемент "div" с классом "text-here"
-          function setText(text) {
-            name.innerText = text;
-            position.innerText = text;
-            email.innerText = text;
-          }
-        </script>             
+  <script src="./d3.v7.min.js"></script>
+  <script src="./d3-org-chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
+
+  <div class="employee-tree-main" style="margin-left: 3px;">
+    <div class="employee-tree-sidebar">
+      <input type="search" placeholder="Поиск" oninput="filterChart(event)" />
+      <button onclick="chart.expandAll(true).render().fit()">Раскрыть все дерево</button>
+      <button onclick="chart.collapseAll(true).render().fit()">Свернуть дерево</button>
+      <button onclick="chart.compact(false).render().fit()">Горизонтально</button>
+      <button onclick="chart.compact(true).render().fit()">Вертикально</button>
+      <button onclick="chart.clearHighlighting().setCentered(133).setUpToTheRootHighlighted('143').render().fit()">Подсветить 10 отдел</button>
+      <button onclick="chart.clearHighlighting().setCentered(148).setUpToTheRootHighlighted('154').render().fit()">Подсветить 14 отдел</button>
+      <button onclick="chart.clearHighlighting().setCentered(150).setUpToTheRootHighlighted('157').render().fit()">Подсветить 21 отдел</button>
+      <button onclick="chart.clearHighlighting().setCentered(186).setUpToTheRootHighlighted('192').render().fit()">Подсветить 22 отдел</button>
+      <button onclick="chart.clearHighlighting().setCentered(202).setUpToTheRootHighlighted('209').render().fit()">Подсветить 24 отдел</button>
+      <button onclick="chart.clearHighlighting().setCentered(212).setUpToTheRootHighlighted('217').render().fit()">Подсветить 31 отдел</button>
+      <button onclick="chart.clearHighlighting().setCentered(234).setUpToTheRootHighlighted('242').render().fit()">Подсветить 34 отдел</button>
+      <button onclick="chart.clearHighlighting().setCentered(246).setUpToTheRootHighlighted('254').render().fit()">Подсветить 41 отдел</button>
+      <button onclick="chart.fit()">Выровнить дерево</button>
+      <button onclick="chart.clearHighlighting().setCentered(100).collapseAll().render().fit()">Очистить</button>
+      <div class="employee-card">
+        <div class="employee-details">
+          <img class="Photo" src="">
+          <h2 class="position"></h2>
+          <p class="name"></p>
+          <p class="email"></p>
+          <p class="phone"></p>
+        </div>
       </div>
-
-      <div class="chart-container"></div>
-      <script src="./chart_scr.js"></script>
-
-      <g class="connections-wrapper"><path class="connection" d="M-877,625C121,625,121,270,1119,270" fill="none" stroke="#E27396" stroke-linecap="round" stroke-width="5" pointer-events="none" marker-start="url(#145_201)" marker-end="url(#arrow-145_201)"></path></g>
     </div>
-  </body>
+
+    <div class="chart-container"></div>
+
+    <script>
+
+      //  d3-org-chart  код 
+      let chart;
+
+      // Функция для скрытия информации о сотруднике
+      function hideEmployeeDetails() {
+        const employeeCard = document.querySelector(".employee-card");
+        employeeCard.classList.add("hidden");
+      }
+
+      function filterChart(e) {
+        // Get input value
+        const value = e.srcElement.value;
+
+        // Clear previous highlighting
+        chart.clearHighlighting();
+
+        // Get chart nodes
+        const data = chart.data();
+
+        // Mark all previously expanded nodes for collapse
+        data.forEach((d) => (d._expanded = false));
+
+        // Loop over data and check if input value matches any name or position
+        data.forEach((d) => {
+          const nameMatches = value !== '' && d.name.toLowerCase().includes(value.toLowerCase());
+          const positionMatches = value !== '' && d.position.toLowerCase().includes(value.toLowerCase());
+
+          // If matches either name or position, mark node as highlighted
+          if (nameMatches || positionMatches) {
+            d._highlighted = true;
+            d._expanded = true;
+          }
+        })
+
+        // Update data and rerender graph
+        chart.data(data).render().fit();
+        console.log('filtering chart', e.srcElement.value);
+      }
+
+      // Функция для показа информации о сотруднике
+      function showEmployeeDetails(button) {
+        const employeeId = button.getAttribute("data-employee-id");
+        const employeeName = button.getAttribute("data-employee-name");
+        const employeePhoto = button.getAttribute("data-employee-photo");
+        const employeePosition = button.getAttribute("data-employee-position");
+        const employeeEmail = button.getAttribute("data-employee-email");
+        const employeePhone = button.getAttribute("data-employee-phone");
+
+        const employeeCard = document.querySelector(".employee-card");
+        const employeePhotoElement = employeeCard.querySelector(".Photo");
+        const employeeNameElement = employeeCard.querySelector(".name");
+        const employeePositionElement = employeeCard.querySelector(".position");
+        const employeeEmailElement = employeeCard.querySelector(".email");
+        const employeePhoneElement = employeeCard.querySelector(".phone");
+
+        // Заполните карточку сотрудника
+        employeePhotoElement.src = `https://raw.githubusercontent.com/pevlik/site_petr/main/img/${employeeName}.jpg`;
+        employeePhotoElement.onerror = () => {
+          employeePhotoElement.src = 'https://raw.githubusercontent.com/pevlik/site_petr/main/img/no_foto_40.png';
+        };
+        employeeNameElement.textContent = employeeName;
+        employeePositionElement.textContent = employeePosition;
+        employeeEmailElement.textContent = employeeEmail ? `Email: ${employeeEmail}` : "";
+        employeePhoneElement.textContent = employeePhone ? `Телефон: ${employeePhone}` : "";
+
+        // Сделайте карточку видимой
+        employeeCard.classList.remove("hidden");
+      }
+
+      d3.csv('https://raw.githubusercontent.com/pevlik/site_petr/main/data_doc32.csv').then((data) => {
+      // d3.csv('D:\Project\site_ver 3\data_doc32.csv').then((data) => {  
+        chart = new d3.OrgChart()
+          .nodeContent(function (d, i, arr, state) {
+            const color = '#FFFFFF';
+            const imageDiffVert = 25 + 2;
+
+            return `
+
+              <div style='width:${d.width}px;
+                height:${d.height}px;
+                padding-top:${imageDiffVert - 2}px;
+                padding-left:1px;
+                padding-right:1px'>
+
+                  <div style="font-family: 'Inter', sans-serif;
+                    background-color:${color};
+                    margin-left:-1px;
+                    width:${d.width - 2}px;
+                    height:${d.height - imageDiffVert}px;
+                    border-radius:10px;border: 3px solid #E4E2E9">
+
+                    <div class="card_id" style="display:flex;
+                      justify-content:flex-end;
+                      margin-top:5px;
+                      margin-right:8px">#${d.data.id}</div>
+
+                    <div style="background-color:${color};
+                      margin-top:${-imageDiffVert - 25}px;
+                      margin-left:${10}px;
+                      border-radius:100px;
+                      width:50px;
+                      height:50px;"></div>
+
+                    <div style="margin-top:${-imageDiffVert - 25}px; 
+                      width: 75px;">
+                      <img src=" ${d.data.image}" style="
+                          margin-left:${5}px;
+                          border-radius:100px;
+                          width:60px;
+                          height:60px;" />
+                    </div>
+
+                    <div style="font-size:16px;
+                      color:#08011E;
+                      margin-left:20px;
+                      margin-right:20px;">${d.data.position} </div>
+
+                    <div style="color:#716E7B;
+                      margin-top:3px;
+                      margin-left:20px;
+                      font-size:15px;"> ${d.data.name} </div>
+
+
+                    <div class="address-highlight">
+                      <div style="
+                        margin-top:3px;
+                        margin-bottom: 3px;
+                        margin-right: 20px;
+                        text-align: right;
+                        font-size:15px;">
+                        <span> ${d.data.address}. \n ${d.data.cabinet}</span>
+                      </div>                      
+                    </div>  
+                  </div>                      
+
+                </div>
+                <div style="text-align:center; margin-top:-15px; margin-left: 294px">
+                  <button style="background-color: rgb(41, 151, 255); 
+                  border-radius: 5px; border: solid 2px #808080; 
+                  color: white; 
+                  cursor: pointer" data-employee-id="${d.data.id}" data-employee-name="${d.data.name}" data-employee-position="${d.data.position}" data-employee-email="${d.data.email}" data-employee-phone="${d.data.phone_number}" data-employee-photo="${d.data.image}"
+                  onclick="(event.target.innerText === 'Подробно') ? showEmployeeDetails(this) : hideEmployeeDetails()">Подробно</button>
+              </div>
+              `;
+          })
+          .container('.chart-container')
+          .data(data)
+          .render();
+      });
+
+    </script>
+
+    <g class="connections-wrapper">
+      <path class="connection" d="M-877,625C121,625,121,270,1119,270" fill="none" stroke="#E27396"
+        stroke-linecap="round" stroke-width="5" pointer-events="none" marker-start="url(#145_201)"
+        marker-end="url(#arrow-145_201)"></path>
+    </g>
+  </div>
+</body>
 
 </html>
