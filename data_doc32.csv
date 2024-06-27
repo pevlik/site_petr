@@ -86,7 +86,7 @@ id,parentId,position,name,image,email,phone_number,address,cabinet
 185,157,практикант,Прялухина Мария Алексеевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Прялухина Мария Алексеевна.jpg,,,Карташихина 1-3,каб. 205
 186,157,Инженер-конструктор 1 категории,Рахлеев Иван Сергеевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Рахлеев Иван Сергеевич.jpg,i_rahleev@petrobalt.ru,,БЦ Морской Центр,
 187,157,Инженер-конструктор 1 категории,Тарица Екатерина Георгиевна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Тарица Екатерина Георгиевна.jpg,Taritsa.Ekaterina@petrobalt.ru,,Карташихина 1-3,каб. 204
-188,157,Ведущий инженер-конструктор,Топчий Татьяна Петровна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Топчий Татьяна Петровна.jpg,t_topchiy@petrobalt.ru,,,
+188,157,Ведущий инженер-конструктор,Топчий Татьяна Петровна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Топчий Татьяна Петровна.jpg,t_topchiy@petrobalt.ru,,Карташихина 1-3,
 189,157,Инженер-Конструктор 2 категории,Тряпицына Ирина Ивановна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Тряпицына Ирина Ивановна.jpg,Tryapitsyna.Irina@petrobalt.ru,,Карташихина 1-3,каб. 104
 190,157,Ведущий инженер-конструктор,Фокин Алексей Иванович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Фокин Алексей Иванович.jpg,A_Fokin@petrobalt.ru,,БЦ Морской Центр,
 191,157,Ведущий инженер-конструктор,Шевелкин Юрий Иванович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Шевелкин Юрий Иванович.jpg,Shevelkin.Yury@petrobalt.ru,,Удаленно,
@@ -113,7 +113,7 @@ id,parentId,position,name,image,email,phone_number,address,cabinet
 214,209,Инженер-конструктор 3 категории,Виноградов Юрий Валерьевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Виноградов Юрий Валерьевич.jpg,Y_Vinogradov@petrobalt.ru,,БЦ Морской Центр,
 215,209,Инженер-конструктор 3 категории,Радченко Любовь Владимировна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Радченко Любовь Владимировна.jpg,L_Radchenko@petrobalt.ru,,БЦ Морской Центр,
 216,209,Техник,Кириллов-Алексеев Павел Анатольевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Кириллов-Алексеев Павел Анатольевич.jpg,kirillov-alekseev@petrobalt.ru,,БЦ Морской Центр,
-217,109,Отдел судовых систем и систем СЭУ (31 отдел),Марченко Семен Александрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Марченко Семен Александрович.jpg,s_marchenko@petrobalt.ru,,,каб. 304
+217,109,Отдел судовых систем и систем СЭУ (31 отдел),Марченко Семен Александрович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Марченко Семен Александрович.jpg,s_marchenko@petrobalt.ru,,Карташихина 1-3,каб. 304
 219,217,Начальник сектора,Бубнова Елена Владимировна,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Бубнова Елена Владимировна.jpg,Bubnova.Elena@petrobalt.ru,,Карташихина 1-3,каб. 304
 220,217,Начальник сектора,Огородников Евгений Николаевич,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Огородников Евгений Николаевич.jpg,E_Ogorodnikov@petrobalt.ru,,,
 221,217,Руководитель проекта,Квакин Владимир Леонидович,https://raw.githubusercontent.com/pevlik/site_petr/main/img/Квакин Владимир Леонидович.jpg,V_Kvakin@petrobalt.ru,,Карташихина 1-3,каб. 102
