@@ -124,6 +124,7 @@
           .nodeContent(function (d, i, arr, state) {
             const color = '#FFFFFF';
             const imageDiffVert = 25 + 2;
+            const photoUrl = `https://raw.githubusercontent.com/pevlik/site_petr/main/img/${d.data.name}.jpg`;
 
             return `
 
@@ -143,7 +144,8 @@
                     <div class="card_id" style="display:flex;
                       justify-content:flex-end;
                       margin-top:5px;
-                      margin-right:8px">#${d.data.id}</div>
+                      margin-right:8px;
+                      color: rgba(0,0,0,0);">s</div>
 
                     <div style="background-color:${color};
                       margin-top:${-imageDiffVert - 25}px;
@@ -154,7 +156,7 @@
 
                     <div style="margin-top:${-imageDiffVert - 25}px; 
                       width: 75px;">
-                      <img src=" ${d.data.image}" style="
+                       <img src="${photoUrl}" onerror="this.src='https://raw.githubusercontent.com/pevlik/site_petr/main/img/no_foto_40.png';" style="
                           margin-left:${5}px;
                           border-radius:100px;
                           width:60px;
@@ -176,7 +178,7 @@
                       <div style="
                         margin-top:3px;
                         margin-bottom: 3px;
-                        margin-right: 20px;
+                        margin-right: 9px;
                         text-align: right;
                         font-size:15px;">
                         <span> ${d.data.address}. \n ${d.data.cabinet}</span>
