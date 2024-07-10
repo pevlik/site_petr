@@ -19,7 +19,7 @@
 
   <div class="employee-tree-main" style="margin-left: 3px;">
     <div class="employee-tree-sidebar">
-      <input type="search" placeholder="Поиск" oninput="filterChart(event)" />
+      <input type="search" id="search-input" placeholder="Поиск" />
       <button onclick="chart.expandAll(true).render().fit()">Раскрыть все дерево</button>
       <button onclick="chart.collapseAll(true).render().fit()">Свернуть дерево</button>
       <button onclick="chart.compact(false).render().fit()">Горизонтально</button>
@@ -34,13 +34,15 @@
       <button onclick="chart.clearHighlighting().setCentered(246).setUpToTheRootHighlighted('254').render().fit()">Подсветить 41 отдел</button>
       <button onclick="chart.fit()">Выровнить дерево</button>
       <button onclick="chart.clearHighlighting().setCentered(100).collapseAll().render().fit()">Очистить</button>
-      <div class="employee-card">
+      <div class="employee-card hidden">
+        <button class="close-button" onclick="hideEmployeeDetails()">✖</button>
+        <img class="employee-photo" src="">
         <div class="employee-details">
-          <img class="Photo" src="">
-          <h2 class="position"></h2>
-          <p class="name"></p>
-          <p class="email"></p>
-          <p class="phone"></p>
+          <h2 class="employee-name"></h2>
+          <p class="employee-position"></p>
+          <p class="employee-address"></p>
+          <p class="employee-email"></p>
+          <p class="employee-phone"></p>
         </div>
       </div>
     </div>
@@ -48,9 +50,9 @@
     <div class="chart-container"></div>
 
     <script>
-
       //  d3-org-chart  код 
       let chart;
+      let searchTimeout;
 
       // Функция для скрытия информации о сотруднике
       function hideEmployeeDetails() {
@@ -58,9 +60,9 @@
         employeeCard.classList.add("hidden");
       }
 
-      function filterChart(e) {
+      function filterChart(value) {
         // Get input value
-        const value = e.srcElement.value;
+        // const value = e.srcElement.value;
 
         // Clear previous highlighting
         chart.clearHighlighting();
@@ -81,28 +83,35 @@
             d._highlighted = true;
             d._expanded = true;
           }
-        })
-
-        // Update data and rerender graph
+        });
         chart.data(data).render().fit();
-        console.log('filtering chart', e.srcElement.value);
+      }
+
+      function handleSearchInput(event) {
+        const value = event.target.value;
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          filterChart(value);
+        }, 300); // Задержка в 300 мс
       }
 
       // Функция для показа информации о сотруднике
-      function showEmployeeDetails(button) {
+      function showEmployeeDetails(button, event) {
         const employeeId = button.getAttribute("data-employee-id");
         const employeeName = button.getAttribute("data-employee-name");
         const employeePhoto = button.getAttribute("data-employee-photo");
         const employeePosition = button.getAttribute("data-employee-position");
+        const employeeAddress = button.getAttribute("data-employee-address");
         const employeeEmail = button.getAttribute("data-employee-email");
         const employeePhone = button.getAttribute("data-employee-phone");
 
         const employeeCard = document.querySelector(".employee-card");
-        const employeePhotoElement = employeeCard.querySelector(".Photo");
-        const employeeNameElement = employeeCard.querySelector(".name");
-        const employeePositionElement = employeeCard.querySelector(".position");
-        const employeeEmailElement = employeeCard.querySelector(".email");
-        const employeePhoneElement = employeeCard.querySelector(".phone");
+        const employeePhotoElement = employeeCard.querySelector(".employee-photo");
+        const employeeNameElement = employeeCard.querySelector(".employee-name");
+        const employeePositionElement = employeeCard.querySelector(".employee-position");
+        const employeeAddressElement = employeeCard.querySelector(".employee-address");
+        const employeeEmailElement = employeeCard.querySelector(".employee-email");
+        const employeePhoneElement = employeeCard.querySelector(".employee-phone");
 
         // Заполните карточку сотрудника
         employeePhotoElement.src = `https://raw.githubusercontent.com/pevlik/site_petr/main/img/${employeeName}.jpg`;
@@ -111,12 +120,50 @@
         };
         employeeNameElement.textContent = employeeName;
         employeePositionElement.textContent = employeePosition;
+        employeeAddressElement.textContent = employeeAddress;
         employeeEmailElement.textContent = employeeEmail ? `Email: ${employeeEmail}` : "";
         employeePhoneElement.textContent = employeePhone ? `Телефон: ${employeePhone}` : "";
 
-        // Сделайте карточку видимой
         employeeCard.classList.remove("hidden");
+
+        const cardWidth = employeeCard.offsetWidth;
+        const cardHeight = employeeCard.offsetHeight;
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        // Проверка и корректировка положения карточки
+        let left = event.pageX;
+        let top = event.pageY;
+
+        if (left + cardWidth > screenWidth) {
+          left = screenWidth - cardWidth - 10;
+        }
+
+        if (top + cardHeight > screenHeight) {
+          top = screenHeight - cardHeight - 30;
+        }
+
+        employeeCard.style.left = `${left}px`;
+        employeeCard.style.top = `${top}px`;
       }
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          hideEmployeeDetails();
+        }
+      });
+
+      document.addEventListener('click', function(event) {
+        const employeeCard = document.querySelector(".employee-card");
+        const target = event.target;
+        const isCard = target.closest(".employee-card");
+        const isButton = target.closest("button");
+        if (!isCard && !isButton) {
+          hideEmployeeDetails();
+        }
+      });
+
+      document.getElementById('search-input').addEventListener('input', handleSearchInput);
 
       d3.csv('https://raw.githubusercontent.com/pevlik/site_petr/main/data_doc32.csv').then((data) => {
       // d3.csv('D:\Project\site_ver 3\data_doc32.csv').then((data) => {  
@@ -125,74 +172,26 @@
             const color = '#FFFFFF';
             const imageDiffVert = 25 + 2;
             const photoUrl = `https://raw.githubusercontent.com/pevlik/site_petr/main/img/${d.data.name}.jpg`;
-
             return `
-
-              <div style='width:${d.width}px;
-                height:${d.height}px;
-                padding-top:${imageDiffVert - 2}px;
-                padding-left:1px;
-                padding-right:1px'>
-
-                  <div style="font-family: 'Inter', sans-serif;
-                    background-color:${color};
-                    margin-left:-1px;
-                    width:${d.width - 2}px;
-                    height:${d.height - imageDiffVert}px;
-                    border-radius:10px;border: 3px solid #E4E2E9">
-
-                    <div class="card_id" style="display:flex;
-                      justify-content:flex-end;
-                      margin-top:5px;
-                      margin-right:8px;
-                      color: rgba(0,0,0,0);">s</div>
-
-                    <div style="background-color:${color};
-                      margin-top:${-imageDiffVert - 25}px;
-                      margin-left:${10}px;
-                      border-radius:100px;
-                      width:50px;
-                      height:50px;"></div>
-
-                    <div style="margin-top:${-imageDiffVert - 25}px; 
-                      width: 75px;">
-                       <img src="${photoUrl}" onerror="this.src='https://raw.githubusercontent.com/pevlik/site_petr/main/img/no_foto_40.png';" style="
-                          margin-left:${5}px;
-                          border-radius:100px;
-                          width:60px;
-                          height:60px;" />
+              <div style='width:${d.width}px; height:${d.height}px; padding-top:${imageDiffVert - 2}px; padding-left:1px; padding-right:1px'>
+                <div style="font-family: 'Inter', sans-serif; background-color:${color}; margin-left:-1px; width:${d.width - 2}px; height:${d.height - imageDiffVert}px; border-radius:10px;border: 3px solid #E4E2E9">
+                  <div class="card_id" style="display:flex; justify-content:flex-end; margin-top:5px; margin-right:8px; color: rgba(0,0,0,0);">s</div>
+                  <div style="background-color:${color}; margin-top:${-imageDiffVert - 25}px; margin-left:${10}px; border-radius:100px; width:50px; height:50px;"></div>
+                  <div style="margin-top:${-imageDiffVert - 25}px; width: 75px;">
+                    <img src="${photoUrl}" onerror="this.src='https://raw.githubusercontent.com/pevlik/site_petr/main/img/no_foto_40.png';" style="margin-left:${5}px; border-radius:100px; width:60px; height:60px;" />
+                  </div>
+                  <div style="font-size:16px; color:#08011E; margin-left:20px; margin-right:20px;">${d.data.position} </div>
+                  <div style="color:#716E7B; margin-top:3px; margin-left:20px; font-size:15px;"> ${d.data.name} </div>
+                  <div class="address-highlight">
+                    <div style="margin-top:3px; margin-bottom: 3px; margin-right: 9px; text-align: right; font-size:15px;">
+                      <span> ${d.data.address}. \n ${d.data.cabinet}</span>
                     </div>
-
-                    <div style="font-size:16px;
-                      color:#08011E;
-                      margin-left:20px;
-                      margin-right:20px;">${d.data.position} </div>
-
-                    <div style="color:#716E7B;
-                      margin-top:3px;
-                      margin-left:20px;
-                      font-size:15px;"> ${d.data.name} </div>
-
-
-                    <div class="address-highlight">
-                      <div style="
-                        margin-top:3px;
-                        margin-bottom: 3px;
-                        margin-right: 9px;
-                        text-align: right;
-                        font-size:15px;">
-                        <span> ${d.data.address}. \n ${d.data.cabinet}</span>
-                      </div>                      
-                    </div>  
-                  </div>                      
-
+                  </div>
                 </div>
-                <div style="text-align:center; margin-top:-15px; margin-left: 294px">
-                  <button style="background-color: rgb(41, 151, 255); 
-                  border-radius: 5px; border: solid 2px #808080; 
-                  color: white; 
-                  cursor: pointer" data-employee-id="${d.data.id}" data-employee-name="${d.data.name}" data-employee-position="${d.data.position}" data-employee-email="${d.data.email}" data-employee-phone="${d.data.phone_number}" data-employee-photo="${d.data.image}"
-                  onclick="(event.target.innerText === 'Подробно') ? showEmployeeDetails(this) : hideEmployeeDetails()">Подробно</button>
+              </div>
+              <div style="text-align:center; margin-top:-15px; margin-left: 294px">
+                <button style="background-color: rgb(41, 151, 255); border-radius: 5px; border: solid 2px #808080; color: white; cursor: pointer" data-employee-id="${d.data.id}" data-employee-name="${d.data.name}" data-employee-position="${d.data.position}" data-employee-email="${d.data.email}" data-employee-phone="${d.data.phone_number}" data-employee-photo="${d.data.image}" data-employee-address="${d.data.address}. \n ${d.data.cabinet}"
+                onclick="(event.target.innerText === 'Подробно') ? showEmployeeDetails(this, event) : hideEmployeeDetails()">Подробно</button>
               </div>
               `;
           })
