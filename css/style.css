@@ -1,119 +1,149 @@
-      html {
-        overflow: hidden;
-      }
+html {
+  overflow: hidden;
+}
 
-      body {
-        font-family: 'Inter', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
 
-      .svg-chart-container {
-        width: 100%;
-      }
+.svg-chart-container {
+  width: 100%;
+}
 
-      .chart-container {
-        width: auto;
-        height: auto;
-        overflow: hidden;
-        position: relative;
-      }
+.chart-container {
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  position: static;
+}
 
-      .highlighted {
-        background-color: rgba(255, 255, 200, 0.2) !important;
-      }
+.details-button {
+  margin-inline-start: 300px;
+  writing-mode: horizontal-tb;
+  padding: 3px 6px;
+  background-color: rgb(41, 151, 255);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 10px;
+  transition: background-color 0.3s ease-in-out;
+  align-self: flex-end;
+  z-index: 10000;
+}
 
-      @media screen and (max-width: 768px) {
-        .user-block {
-          padding: 15px;
-        }
-      }
+.details-button:hover {
+  background-color: #45a049;
+}
 
-      input {
-        /* Add magnifier icon */
-        background-image: url(/img/magnifier.svg) !important;
-        background-size: 16px 16px !important;
-        background-repeat: no-repeat !important;
-        background-position: 8px !important;
-        /* Set border and border-radius */
-        border: 1px solid #000000;
-        border-radius: 5px;
-        /* Set font size and family */
-        font-size: 14px !important;
-        font-family: inherit;
-        /* Set line-height and height */
-        line-height: 20px;
-        height: 38px !important;
-        /* Remove extra margins */
-        margin: 0 !important;
-        /* Set padding */
-        padding: 8px 32px !important;
-        padding-left: 32px !important;
-        /* Box sizing for consistent layout */
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        /* Transition for border color */
-        -webkit-transition: border-color 0.1s;
-        -moz-transition: border-color 0.1s;
-        transition: border-color 0.1s;
-      }
+.hidden {
+  display: none;
+}
 
-      .employee-tree-sidebar button {
-        width: 236px;
-        padding: 5px;
-        margin-top: 1px;
-        background-color: rgb(41, 151, 255);
-        color: white;
-        border: solid 1px;
-        border-color: black;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+.highlighted {
+  background-color: rgba(255, 255, 200, 0.2) !important;
+}
 
-      .employee-tree-sidebar {
-        width: 290px;
-        position: absolute;
-        float: left;
-        margin-top: 20px;
-        z-index: 100;
-      }
+@media screen and (max-width: 768px) {
+  .user-block {
+    padding: 15px;
+  }
+}
 
-      .employee-card {
-        display: block;
-        width: 250px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        position: absolute;
-        left: 400px;
-      }
+input {
+  background-image: url(/img/magnifier.svg) !important; /* Измените путь, если иконка находится в другой папке */
+  background-size: 16px 16px !important;
+  background-repeat: no-repeat !important;
+  background-position: 8px !important;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: 14px !important;
+  font-family: inherit;
+  line-height: 20px;
+  height: 38px !important;
+  margin: 0 !important;
+  padding: 8px 32px !important;
+  padding-left: 32px !important;
+  right: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: border-color 0.1s;
+  -moz-transition: border-color 0.1s;
+  transition: border-color 0.1s;
+}
 
-      .employee-card img {
-        width: 100%;
-        border-radius: 5px;
-        margin-bottom: 10px;
-      }
+.employee-tree-sidebar button {
+  width: 236px;
+  padding: 5px;
+  margin-top: 1px;
+  background-color: rgb(41, 151, 255);
+  color: white;
+  border: solid 1px;
+  border-color: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-      button:hover {
-        background-color: #5752d7;
-        border-width: 5px black;
-      }
+.employee-tree-sidebar {
+  width: 290px;
+  position: absolute;
+  float: left;
+  margin-top: 20px;
+}
 
-      .emp-info {
-        background-color: rgb(41, 151, 255);
-        border-radius: 5px;
-        border: solid 1px black;
-        color: white;
-        cursor: pointer;
-        margin-top: 20px;
-        padding: 2px;
-        width: 90px;
-      }
+.employee-card {
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 280px;
+  z-index: 10000;
+  text-align: center;
+}
 
-      .emp-info:hover {
-        background-color: #5752d7;
-        /* Note: 'border-color', not 'border-width', to change color */
-      }
+.employee-card .close-button {
+  position: absolute;
+  top: -6px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #ff0000;
+  width: 24px;
+  cursor: pointer;
+}
+
+.employee-photo {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.employee-details {
+  text-align: left;
+}
+
+.employee-name {
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+.employee-position {
+  font-size: 1.2em;
+  color: #212121;
+  margin: 5px 0;
+}
+
+.employee-address,
+.employee-email,
+.employee-phone {
+  color: #555555;
+  margin: 5px 0;
+}
